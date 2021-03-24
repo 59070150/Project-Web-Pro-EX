@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Exercise Week <%= week %></title>
+    <link rel="stylesheet" href="/bulma/css/bulma.min.css">
+</head>
+<body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item">
+        <img src="/itkmitl.png" width="112" height="28">
+      </a>
+  
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  
+    <div id="navbarBasic" class="navbar-menu">
+      <div class="navbar-start">
+        <a href="/home" class="navbar-item">
+          Home
+        </a>
+
+        <a href="/semeter" class="navbar-item">
+          เลือกปีการศึกษาและเทอม
+        </a>
+  
+        <a href="/progress" class="navbar-item">
+          Progress for admin
+        </a>
+
+        <a href="/givescore" class="navbar-item">
+          Give Score
+        </a>
+
+        <a href="/studentlist" class="navbar-item">
+          Student List
+        </a>
+
+        <a href="/register" class="navbar-item">
+          User Management
+        </a>
+  
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More
+          </a>
+  
+          <div class="navbar-dropdown">
+            <a class="navbar-item">
+              Report an issue
+            </a>
+          </div>
+        </div>
+      </div>
+  
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <p>Welcome <%= username %></p>
+        </div>
+
+        <div class="navbar-item">
+            <a href="/logout" class="button is-danger">
+              Logout
+            </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+      <div class="container mt-5">
+          <div class="title is-1">Edit Exercise Week <%= week %></div>
+          <form action="" method="POST">
+            <div class="title is-3">Write Description</div>
+            <div class="control">
+              <textarea name="" id="" class="textarea" placeholder="Write Description"></textarea>
+            </div>
+            <div class="title is-3 mt-5">Upload Image here</div>
+            <div class="block">
+              <input type="file" accept="image/*" onchange="preview_image(event)">
+                  <div class="card">
+                    <div class="card image">
+                      <div class="image is-128x128">
+                        <img id="output_image">
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="title is-3 mt-5">Add Exercise Github Link </div>
+            <input class="input" type="text" placeholder="Exercise Github Link">
+            <div class="title is-3 mt-5">Add Solution Github Link </div>
+            <input class="input" type="text" placeholder="Solution Github Link">
+            <p class="mt-3">Date to publish solution : <input type="date" class="Date" id=""></p>
+            <div class="title is-3 mt-5">Add Exercise</div>
+            <div class="table-container">
+              <table class="table is-bordered" id="ExTable1">
+                <thead>
+                      <tr>
+                        <th>Add Row</th>
+                        <th>Add Exercise Title</th>
+                        <th>Add Exercise Description</th>
+                        <th>Add Score</th>
+                        <th>Delete Row</th>
+                      </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><button type="button" onclick="addRows()">+</button></td>
+                        <td><input type="text"></td>
+                        <td><textarea name="" id="" cols="30" rows="3"></textarea></td>
+                        <td><input type="text"></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+            <div align="center"><button type="submit" class="button is-primary mt-5 mb-5">Save Change</button> <a href="/home" class="button is-danger mt-5 mb-5">Cancel</a></div>
+          </form>
+      </div>
+
+      <script type="text/javascript">
+            function preview_image(event) 
+            {
+                let reader = new FileReader();
+                reader.onload = function()
+                {
+                    let output = document.getElementById('output_image');
+                    output.src = reader.result;
+                }
+                reader.readAsDataURL(event.target.files[0]);
+            }
+
+            function addRows() {
+                let table = document.getElementById("ExTable1");
+                let rowCount = table.rows.length;
+                let row = table.insertRow(-1);
+                let cell0 = row.insertCell(0);
+                let cell1 = row.insertCell(1);
+                let cell2 = row.insertCell(2);
+                let cell3 = row.insertCell(3);
+                let cell4 = row.insertCell(4);
+                cell1.innerHTML = "<input type='text'>";
+                cell2.innerHTML = "<textarea name='' id='' cols='30' rows='3'></textarea>";
+                cell3.innerHTML = "<input type='text'>";
+                cell4.innerHTML = "<button type='button' onclick='deleteRows(this)'>Delete</button>"
+            }
+
+            function deleteRows(r) {
+                let i = r.parentNode.parentNode.rowIndex;
+	            document.getElementById("ExTable1").deleteRow(i);
+            }
+      </script>
+</body>
+</html>

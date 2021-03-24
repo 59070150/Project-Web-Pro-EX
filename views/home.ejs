@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/bulma/css/bulma.min.css">
+</head>
+<body>
+  <% if (userlevel != "admin") { %>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item">
+          <img src="/itkmitl.png" width="112" height="28">
+        </a>
+    
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+    
+      <div id="navbarBasic" class="navbar-menu">
+        <div class="navbar-start">
+          <a href="/home" class="navbar-item">
+            Home
+          </a>
+    
+          <a href="/progress" class="navbar-item">
+            Progress
+          </a>
+    
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More
+            </a>
+    
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                Report an issue
+              </a>
+            </div>
+          </div>
+        </div>
+    
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <p>Welcome <%= username %></p>
+          </div>
+          <div class="navbar-item">
+            <a href="/logout" class="button is-danger">Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-5">
+      <div class="title is-1">News</div>
+      <div class="table-container">
+        <table class="table is-fullwidth">
+          <thead>
+            <tr>
+              <th>News title</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, nisi!</td>
+            </tr>
+            <tr>
+              <td>Title 2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="title is-2">Class Material</div>
+      <div class="table-container">
+        <table class="table is-bordered is-fullwidth">
+          <thead>
+            <tr>
+              <th>Class Week</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="/classWeek/1">Class Week 1</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/2">Class Week 2</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/3">Class Week 3</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/4">Class Week 4</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/5">Class Week 5</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/6">Class Week 6</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/7">Class Week 7</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/8">Class Week 8</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/9">Class Week 9</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/10">Class Week 10</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/11">Class Week 11</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/12">Class Week 12</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/13">Class Week 13</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/14">Class Week 14</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/15">Class Week 15</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="title is-2 mt-5">Exercise</div>
+      <div class="table-container">
+        <table class="table is-bordered is-fullwidth">
+          <thead>
+            <tr>
+              <th>Exercise Week</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="/exWeek/1">Exercise Week 1</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/2">Exercise Week 2</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/3">Exercise Week 3</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/4">Exercise Week 4</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/5">Exercise Week 5</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/6">Exercise Week 6</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/7">Exercise Week 7</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/8">Exercise Week 8</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/9">Exercise Week 9</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/10">Exercise Week 10</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/11">Exercise Week 11</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/12">Exercise Week 12</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/13">Exercise Week 13</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/14">Exercise Week 14</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/15">Exercise Week 15</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% } else { %>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item">
+          <img src="/itkmitl.png" width="112" height="28">
+        </a>
+    
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+    
+      <div id="navbarBasic" class="navbar-menu">
+        <div class="navbar-start">
+          <a href="/home" class="navbar-item">
+            Home
+          </a>
+
+          <a href="/semeter" class="navbar-item">
+            เลือกปีการศึกษาและเทอม
+          </a>
+    
+          <a href="/progress" class="navbar-item">
+            Progress for admin
+          </a>
+
+          <a href="/givescore" class="navbar-item">
+            Give Score
+          </a>
+
+          <a href="/studentlist" class="navbar-item">
+            Student List
+          </a>
+
+          <a href="/register" class="navbar-item">
+            User Management
+          </a>
+    
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More
+            </a>
+    
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                Report an issue
+              </a>
+            </div>
+          </div>
+        </div>
+    
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <p>Welcome <%= username %></p>
+          </div>
+
+          <div class="navbar-item">
+              <a href="/logout" class="button is-danger">
+                Logout
+              </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-5">
+      <div class="title is-1">Manage News</div>
+      <div class="table-container">
+        <table class="table is-fullwidth">
+          <thead>
+            <tr>
+              <th>News title</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, nisi!</td>
+            </tr>
+            <tr>
+              <td>Title 2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div align="center"><a href="/editnews" class="button is-primary">Edit News</a></div>
+      <div class="title is-2">Manage Class Material</div>
+      <div class="table-container">
+        <table class="table is-bordered is-fullwidth">
+          <thead>
+            <tr>
+              <th>Class Week</th>
+              <th align="center">Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="/classWeek/1">Class Week 1</a></td>
+              <td align="center"><a href="/editClass/1">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/2">Class Week 2</a></td>
+              <td align="center"><a href="/editClass/2">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/3">Class Week 3</a></td>
+              <td align="center"><a href="/editClass/3">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/4">Class Week 4</a></td>
+              <td align="center"><a href="/editClass/4">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/5">Class Week 5</a></td>
+              <td align="center"><a href="/editClass/5">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/6">Class Week 6</a></td>
+              <td align="center"><a href="/editClass/6">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/7">Class Week 7</a></td>
+              <td align="center"><a href="/editClass/7">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/8">Class Week 8</a></td>
+              <td align="center"><a href="/editClass/8">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/9">Class Week 9</a></td>
+              <td align="center"><a href="/editClass/9">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/10">Class Week 10</a></td>
+              <td align="center"><a href="/editClass/10">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/11">Class Week 11</a></td>
+              <td align="center"><a href="/editClass/11">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/12">Class Week 12</a></td>
+              <td align="center"><a href="/editClass/12">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/13">Class Week 13</a></td>
+              <td align="center"><a href="/editClass/13">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/14">Class Week 14</a></td>
+              <td align="center"><a href="/editClass/14">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/classWeek/15">Class Week 15</a></td>
+              <td align="center"><a href="/editClass/15">Edit</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="title is-2 mt-5">Manege Exercise</div>
+      <div class="table-container">
+        <table class="table is-bordered is-fullwidth">
+          <thead>
+            <tr>
+              <th>Exercise Week</th>
+              <th align="center">Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="/exWeek/1">Exercise Week 1</a></td>
+              <td align="center"><a href="/editEx/1">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/2">Exercise Week 2</a></td>
+              <td align="center"><a href="/editEx/2">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/3">Exercise Week 3</a></td>
+              <td align="center"><a href="/editEx/3">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/4">Exercise Week 4</a></td>
+              <td align="center"><a href="/editEx/4">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/5">Exercise Week 5</a></td>
+              <td align="center"><a href="/editEx/5">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/6">Exercise Week 6</a></td>
+              <td align="center"><a href="/editEx/6">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/7">Exercise Week 7</a></td>
+              <td align="center"><a href="/editEx/7">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/8">Exercise Week 8</a></td>
+              <td align="center"><a href="/editEx/8">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/9">Exercise Week 9</a></td>
+              <td align="center"><a href="/editEx/9">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/10">Exercise Week 10</a></td>
+              <td align="center"><a href="/editEx/10">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/11">Exercise Week 11</a></td>
+              <td align="center"><a href="/editEx/11">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/12">Exercise Week 12</a></td>
+              <td align="center"><a href="/editEx/12">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/13">Exercise Week 13</a></td>
+              <td align="center"><a href="/editEx/13">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/14">Exercise Week 14</a></td>
+              <td align="center"><a href="/editEx/14">Edit</a></td>
+            </tr>
+            <tr>
+              <td><a href="/exWeek/15">Exercise Week 15</a></td>
+              <td align="center"><a href="/editEx/15">Edit</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+  <% } %>
+    
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Class Week <%= week %></title>
+    <link rel="stylesheet" href="/bulma/css/bulma.min.css">
+</head>
+<body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item">
+        <img src="/itkmitl.png" width="112" height="28">
+      </a>
+  
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  
+    <div id="navbarBasic" class="navbar-menu">
+      <div class="navbar-start">
+        <a href="/home" class="navbar-item">
+          Home
+        </a>
+
+        <a href="/semeter" class="navbar-item">
+          เลือกปีการศึกษาและเทอม
+        </a>
+  
+        <a href="/progress" class="navbar-item">
+          Progress for admin
+        </a>
+
+        <a href="/givescore" class="navbar-item">
+          Give Score
+        </a>
+
+        <a href="/studentlist" class="navbar-item">
+          Student List
+        </a>
+
+        <a href="/register" class="navbar-item">
+          User Management
+        </a>
+  
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More
+          </a>
+  
+          <div class="navbar-dropdown">
+            <a class="navbar-item">
+              Report an issue
+            </a>
+          </div>
+        </div>
+      </div>
+  
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <p>Welcome <%= username %></p>
+        </div>
+
+        <div class="navbar-item">
+            <a href="/logout" class="button is-danger">
+              Logout
+            </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+      <div class="container mt-5">
+        <div class="title is-1">Edit Class Week <%= week %></div>
+        <form action="" method="POST">
+          <div class="title is-3">Add Video Link Here</div>
+          <div class="table-container">
+            <table class="table is-bordered" id="VideoTable1">
+                <thead>
+                    <tr>
+                        <th>Add Row</th>
+                        <th>Add Video Name</th>
+                        <th>Add Video Link</th>
+                        <th>Delete Row</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><button type="button" onclick="addRows()">+</button></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+          <div class="title is-3">Add Class Slide or PDF Here</div>
+          <div id="" class="file">
+            <label class="file-label">
+              Choose File to upload :
+            </label>
+            <input type="file" name="class1" multiple>
+          </div>
+          <div class="title is-3 mt-5">Add Class Project Example Here</div>
+          <div id="" class="file">
+            <label class="file-label">
+              Choose File to upload :
+            </label>
+            <input type="file" name="proj1" multiple>
+          </div>
+          <div class="title is-3 mt-5">Write Description</div>
+          <div class="control">
+            <textarea name="" id="" class="textarea"></textarea>
+          </div>
+          <div align="center"><button type="submit" class="button is-primary mt-5 mb-5">Save Change</button> <a href="/home" class="button is-danger mt-5 mb-5">Cancel</a></div>
+        </form>
+      </div>
+
+      <script>
+          function addRows() {
+            let table = document.getElementById("VideoTable1");
+            let rowCount = table.rows.length;
+            let row = table.insertRow(-1);
+            let cell0 = row.insertCell(0);
+            let cell1 = row.insertCell(1);
+            let cell2 = row.insertCell(2);
+            let cell3 = row.insertCell(3);
+            cell1.innerHTML = "<input type='text'>";
+            cell2.innerHTML = "<input type='text'>";
+            cell3.innerHTML = "<button type='button' onclick='deleteRows(this)'>Delete</button>";
+          }
+
+          function deleteRows(r) {
+            let i = r.parentNode.parentNode.rowIndex;
+	          document.getElementById("VideoTable1").deleteRow(i);
+          }
+      </script>
+</body>
+</html>

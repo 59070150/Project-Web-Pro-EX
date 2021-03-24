@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Admin</title>
+    <link rel="stylesheet" href="/bulma/css/bulma.min.css">
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item">
+            <img src="/itkmitl.png" width="112" height="28">
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navbarBasic" class="navbar-menu">
+          <div class="navbar-start">
+            <a href="/home" class="navbar-item">
+              Home
+            </a>
+
+            <a href="/semeter" class="navbar-item">
+              เลือกปีการศึกษาและเทอม
+            </a>
+      
+            <a href="/progress" class="navbar-item">
+              Progress for admin
+            </a>
+
+            <a href="/givescore" class="navbar-item">
+              Give Score
+            </a>
+
+            <a href="/studentlist" class="navbar-item">
+              Student List
+            </a>
+
+            <a href="/register" class="navbar-item">
+              User Management
+            </a>
+      
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                More
+              </a>
+      
+              <div class="navbar-dropdown">
+                <a class="navbar-item">
+                  Report an issue
+                </a>
+              </div>
+            </div>
+          </div>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <p>Welcome <%= username %></p>
+            </div>
+
+            <div class="navbar-item">
+                <a href="/logout" class="button is-danger">
+                  Logout
+                </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="container mt-5">
+          <div class="message is-success">
+            <p> <%=(typeof alertMsg!='undefined')? alertMsg:''%> </p>
+          </div>
+          <div class="title is-1">User Management</div>
+          <div class="title is-3">Register for new admin</div>
+          <form action="/register" method="POST">
+            <div class="field">
+              <label class="label">Username</label>
+              <div class="control">
+                <input class="input" type="text" id="username" name="username" placeholder="Insert username" required>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <input class="input" type="password" id="password" name="password" placeholder="Insert password" required>
+              </div>
+            </div>
+            <input type="submit" value="Register">
+          </form>
+      </div>
+</body>
+</html>
