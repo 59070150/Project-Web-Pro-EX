@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/bulma/css/bulma.min.css">
 </head>
 <body>
+  <% if (userlevel == "admin") { %>
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="navbar-item">
@@ -75,6 +76,27 @@
     </nav>
     <div class="container mt-5">
         <div class="title is-1">เลือกปีการศึกษาและเทอม</div>
-    </div>
+        <form action="" method="POST">
+          <div class="title is-3">ปีการศึกษาและเทอม</div>
+          <div class="select">
+            <select name="" id="">
+              <option value="">ปีการศึกษา</option>
+              <% var year = 2564; %>
+              <% for (let i = 0; i <= 10; i++) { %>
+                <option value="<% year; %>"><%= year; %></option>
+                <% year++; %>
+              <% } %>
+            </select>
+          </div>
+          <div class="select">
+            <select name="" id="">
+              <option value="">เทอม</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+          </div>
+          <input type="submit" value="Apply">
+        </form>
+  <% } %>
 </body>
 </html>
