@@ -37,7 +37,7 @@ app.get('/login', (req, res) => {
 
 app.get('/logout', (req, res) => {
 	req.session.destroy();
-  res.redirect('/login')
+  	res.redirect('/login')
 })
 
 app.post('/login', (req, res) => {
@@ -158,7 +158,8 @@ app.get('/editClass/:week', (req, res) => {
   const { week } = req.params;
   if (req.session.loggedin == true) {
 		const username = req.session.username;
-	  	res.render('editClass', {week: week, username: username});
+		const userlevel = req.session.userlevel;
+	  	res.render('editClass', {week: week, username: username, userlevel: userlevel});
 	} else {
   		res.send('Please login to view this page!');
 	}
@@ -169,18 +170,38 @@ app.get('/editEx/:week', (req, res) => {
 	const { week } = req.params;
 	if (req.session.loggedin == true) {
 		const username = req.session.username;
-  		res.render('editEx', {week: week, username: username});
+		const userlevel = req.session.userlevel;
+  		res.render('editEx', {week: week, username: username, userlevel: userlevel});
 	} else {
 	  res.send('Please login to view this page!');
   }
 	  res.end();
 })
 
-app.get('/studentlist', (req, res, next) => {
-	connection.query('SELECT * FROM user', function(error, results, fields) {
+app.get('/studentlist', (req, res) => {
+	if (req.session.loggedin == true) {
+		res.render('studentlist', {username: req.session.username, userlevel: req.session.userlevel, userData: []});
+	} else {
+		res.send('Please login to view this page!');
+	}
+		res.end();
+})
+
+app.post('/studentlist', (req, res, next) => {
+	let selectLevel = req.body.level;
+	connection.query('SELECT * FROM user WHERE userlevel = ?', [selectLevel], function(error, results, fields) {
 		if (error) throw error;
 		res.render('studentlist', {username: req.session.username, userlevel: req.session.userlevel, userData: results});
 	});
+})
+
+app.get('/editnews', (req, res) => {
+	if (req.session.loggedin == true) {
+		res.render('editnews', {username: req.session.username, userlevel: req.session.userlevel});
+	} else {
+		res.send('Please login to view this page!');
+	}
+		res.end();
 })
 
 app.listen(port, () => {
