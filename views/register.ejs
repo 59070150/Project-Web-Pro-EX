@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/bulma/css/bulma.min.css">
 </head>
 <body>
+  <% if (userlevel == "admin")  { %>
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="navbar-item">
@@ -95,5 +96,6 @@
             <input type="submit" value="Register">
           </form>
       </div>
+  <% } %>
 </body>
 </html>
