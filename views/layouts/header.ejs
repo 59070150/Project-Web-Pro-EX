@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Page</title>
+    <link rel="stylesheet" href="/bulma/css/bulma.min.css">
+    <script src="/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
+</head>
+<body>
+    <% if (!isAdmin) { %>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a class="navbar-item">
+              <img src="/itkmitl.png" width="112" height="28">
+            </a>
+        
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
+        
+          <div id="navbarBasic" class="navbar-menu">
+            <div class="navbar-start">
+              <a href="/home" class="navbar-item">
+                หน้าหลัก
+              </a>
+        
+              <a href="/progress" class="navbar-item">
+                ดูคะแนน
+              </a>
+    
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                  More
+                </a>
+        
+                <div class="navbar-dropdown">
+                  <a class="navbar-item">
+                    Report an issue
+                  </a>
+                </div>
+              </div>
+            </div>
+    
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <p>Welcome <%= username %></p>
+              </div>
+              <div class="navbar-item">
+                <a href="/logout" class="button is-danger">Logout</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <%} else {%>
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                  <a class="navbar-item">
+                    <img src="/itkmitl.png" width="112" height="28">
+                  </a>
+              
+                  <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                  </a>
+                </div>
+              
+                <div id="navbarBasic" class="navbar-menu">
+                  <div class="navbar-start">
+                    <a href="/home" class="navbar-item">
+                      หน้าหลัก
+                    </a>
+          
+                    <a href="/semeter" class="navbar-item">
+                      เลือกปีการศึกษาและเทอม
+                    </a>
+              
+                    <a href="/progress" class="navbar-item">
+                      ดูคะแนนสำหรับเจ้าหน้าที่
+                    </a>
+          
+                    <a href="/givescore" class="navbar-item">
+                      ให้คะแนน
+                    </a>
+          
+                    <a href="/studentlist" class="navbar-item">
+                      รายชื่อนักศึกษา
+                    </a>
+          
+                    <a href="/register" class="navbar-item">
+                      จัดการผู้ใช้งาน
+                    </a>
+          
+                    <div class="navbar-item has-dropdown is-hoverable">
+                      <a class="navbar-link">
+                        More
+                      </a>
+              
+                      <div class="navbar-dropdown">
+                        <a class="navbar-item">
+                          Report an issue
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+              
+                  <div class="navbar-end">
+                    <div class="navbar-item">
+                      <p>Welcome <%= username %></p>
+                    </div>
+          
+                    <div class="navbar-item">
+                        <a href="/logout" class="button is-danger">
+                          Logout
+                        </a>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+        <% } %>
