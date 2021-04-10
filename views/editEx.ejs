@@ -1,87 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Exercise Week <%= week %></title>
-    <link rel="stylesheet" href="/bulma/css/bulma.min.css">
-</head>
-<body>
-  <% if (userlevel == "admin") { %>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item">
-          <img src="/itkmitl.png" width="112" height="28">
-        </a>
-    
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-    
-      <div id="navbarBasic" class="navbar-menu">
-        <div class="navbar-start">
-          <a href="/home" class="navbar-item">
-            Home
-          </a>
-  
-          <a href="/semeter" class="navbar-item">
-            เลือกปีการศึกษาและเทอม
-          </a>
-    
-          <a href="/progress" class="navbar-item">
-            Progress for admin
-          </a>
-  
-          <a href="/givescore" class="navbar-item">
-            Give Score
-          </a>
-  
-          <a href="/studentlist" class="navbar-item">
-            Student List
-          </a>
-  
-          <a href="/register" class="navbar-item">
-            User Management
-          </a>
-    
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              More
-            </a>
-    
-            <div class="navbar-dropdown">
-              <a class="navbar-item">
-                Report an issue
-              </a>
-            </div>
-          </div>
-        </div>
-    
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <p>Welcome <%= username %></p>
-          </div>
-  
-          <div class="navbar-item">
-              <a href="/logout" class="button is-danger">
-                Logout
-              </a>
-          </div>
-        </div>
-      </div>
-    </nav>
+<%- include('layouts/header'); %>
+  <% if (isAdmin) { %>
     <div class="container mt-5">
-      <div class="title is-1">Edit Exercise Week <%= week %></div>
+      <div class="title is-1">แก้ไขแบบฝึกหัดสัปดาห์ <%= week %></div>
       <form action="" method="POST">
-        <div class="title is-3">Write Description</div>
+        <div class="title is-3">เขียนคำอธิบาย</div>
         <div class="control">
           <textarea name="" id="" class="textarea" placeholder="Write Description"></textarea>
         </div>
-        <div class="title is-3 mt-5">Upload Image here</div>
+        <div class="title is-3 mt-5">อัพโหลดรูป ที่นี่</div>
         <div class="block">
           <input type="file" accept="image/*" onchange="preview_image(event)">
               <div class="card">
@@ -92,21 +18,21 @@
                 </div>
               </div>
         </div>
-        <div class="title is-3 mt-5">Add Exercise Github Link </div>
+        <div class="title is-3 mt-5">เพิ่มลิงค์ Github แบบฝึกหัด </div>
         <input class="input" type="text" placeholder="Exercise Github Link">
-        <div class="title is-3 mt-5">Add Solution Github Link </div>
+        <div class="title is-3 mt-5">เพิ่มลิงค์ Github เฉลยแบบฝึกหัด </div>
         <input class="input" type="text" placeholder="Solution Github Link">
-        <p class="mt-3">Date to publish solution : <input type="date" class="Date" id=""></p>
+        <p class="mt-3">ตั้งวันที่แสดงลิงค์เฉลยแบบฝึกหัด : <input type="date" class="Date" id=""></p>
         <div class="title is-3 mt-5">Add Exercise</div>
         <div class="table-container">
           <table class="table is-bordered" id="ExTable1">
             <thead>
                   <tr>
-                    <th>Add Row</th>
-                    <th>Add Exercise Title</th>
-                    <th>Add Exercise Description</th>
-                    <th>Add Score</th>
-                    <th>Delete Row</th>
+                    <th>เพิ่มแถว</th>
+                    <th>เพิ่มหัวข้อแบบฝึกหัด</th>
+                    <th>เพิ่มคำอธิบายแบบฝึกหัด</th>
+                    <th>เพิ่มคะแนน</th>
+                    <th>ลบแถว</th>
                   </tr>
             </thead>
             <tbody>
@@ -120,7 +46,7 @@
             </tbody>
           </table>
         </div>
-        <div align="center"><button type="submit" class="button is-primary mt-5 mb-5">Save Change</button> <a href="/home" class="button is-danger mt-5 mb-5">Cancel</a></div>
+        <div align="center"><button type="submit" class="button is-primary mt-5 mb-5">บันทึก</button> <a href="/home" class="button is-danger mt-5 mb-5">ยกเลิก</a></div>
       </form>
     </div>
   <% } %>
@@ -157,5 +83,4 @@
 	            document.getElementById("ExTable1").deleteRow(i);
             }
       </script>
-</body>
-</html>
+<%- include('layouts/footer'); %>

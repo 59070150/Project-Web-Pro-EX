@@ -1,12 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Give Score</title>
-</head>
-<body>
-    
-</body>
-</html>
+<%- include('layouts/header'); %>
+  <% if (isAdmin) { %>
+        <div class="container mt-5">
+            <div class="title is-1">Give Score</div>
+            <form action="" method="post">
+                <div class="select">
+                    <select name="" id="">
+                      <option value="">Week</option>
+                      <% for (let i = 1; i <= 15; i++) { %>
+                        <option value="<% i; %>">Week <%= i; %></option>
+                      <% } %>
+                    </select>
+                </div>
+                <div class="select">
+                    <select name="" id="">
+                      <option value="">Section</option>
+                      <option value="">เช้า</option>
+                      <option value="">บ่าย</option>
+                    </select>
+                </div>
+                <input type="submit" value="Choose">
+            </form>
+            <div class="table-container mt-5">
+                <table class="table is-bordered">
+                    <thead>
+                        <tr>
+                          <th>รหัสนักศึกษา</th>
+                          <th>สถานะ</th>
+                          <th>ให้คะแนน</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>59070150</td>
+                        <td>4/5</td>
+                        <td><a href="/givepage">ให้คะแนน</a></td>
+                      </tr>
+                      <tr>
+                        <td>59070151</td>
+                        <td>3/5</td>
+                        <td><a href="/givepage">ให้คะแนน</a></td>
+                      </tr>
+                      <tr>
+                        <td>59070152</td>
+                        <td>5/5</td>
+                        <td><a href="/givepage">ให้คะแนน</a></td>
+                      </tr>
+                        <!-- <% if (userData.length != 0) {
+                            var i = 1;
+                            userData.forEach(function(data) {
+                        %>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        <% i++; }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="7">No Data Found</td>
+                            </tr>
+                        <% } %> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+  <% } %>
+<%- include('layouts/footer'); %>

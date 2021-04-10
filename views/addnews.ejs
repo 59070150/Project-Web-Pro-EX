@@ -1,0 +1,31 @@
+<%- include('layouts/header'); %>
+    <% if (isAdmin) { %>
+        <div class="container mt-5">
+            <div class="title is-1">เพิ่มข่าว</div>
+            <div class="message is-success">
+              <p> <%=(typeof alertMsg!='undefined')? alertMsg:''%> </p>
+            </div>
+            <form action="/addnews" method="post">
+              <div class="field">
+                <label class="label">หัวข้อข่าว</label>
+                <div class="control">
+                  <input class="input" type="text" name="title" placeholder="Insert News Title" required>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">สัปดาห์ที่</label>
+                <div class="select">
+                  <select name="week">
+                    <option value="">สัปดาห์</option>
+                    <% for (let i = 1; i <= 15; i++) { %>
+                      <option value=<%= i; %>>สัปดาห์ <%= i; %></option>
+                    <% } %>
+                  </select>
+                </div>
+              </div>
+              <textarea name="newscontent" id="editor" placeholder="เขียนข่าวที่นี่"></textarea>
+              <div align="center"><button id="submit" class="button is-primary mt-5 mb-5" type="submit">บันทึก</button> <a href="/home" class="button is-danger mt-5 mb-5">ยกเลิก</a></div>
+            </form>
+        </div>
+    <% } %>
+<%- include('layouts/footer'); %>

@@ -1,102 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student List</title>
-    <link rel="stylesheet" href="/bulma/css/bulma.min.css">
-</head>
-<body>
-  <% if (userlevel == "admin")  { %>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="navbar-item">
-            <img src="/itkmitl.png" width="112" height="28">
-          </a>
-      
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-      
-        <div id="navbarBasic" class="navbar-menu">
-          <div class="navbar-start">
-            <a href="/home" class="navbar-item">
-              Home
-            </a>
-  
-            <a href="/semeter" class="navbar-item">
-              เลือกปีการศึกษาและเทอม
-            </a>
-      
-            <a href="/progress" class="navbar-item">
-              Progress for admin
-            </a>
-  
-            <a href="/givescore" class="navbar-item">
-              Give Score
-            </a>
-  
-            <a href="/studentlist" class="navbar-item">
-              Student List
-            </a>
-  
-            <a href="/register" class="navbar-item">
-              User Management
-            </a>
-      
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                More
-              </a>
-      
-              <div class="navbar-dropdown">
-                <a class="navbar-item">
-                  Report an issue
-                </a>
-              </div>
-            </div>
-          </div>
-      
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <p>Welcome <%= username %></p>
-            </div>
-  
-            <div class="navbar-item">
-                <a href="/logout" class="button is-danger">
-                  Logout
-                </a>
-            </div>
-          </div>
-        </div>
-    </nav>
+<%- include('layouts/header'); %>
+  <% if (isAdmin) { %>
     <div class="container mt-5">
-      <div class="title is-1">Student List</div>
+      <div class="title is-1">รายชื่อนักศึกษา</div>
       <form action="/studentlist" method="POST">
         <div class="select">
-          <select name="level">
-            <option value="*">Userlevel</option>
-            <option value="admin">admin</option>
-            <option value="student">student</option>
+          <select name="year">
+            <% var year = 2554; %>
+              <% for (let i = 0; i <= 10; i++) { %>
+                <option value="<% year; %>"><%= year; %></option>
+                <% year++; %>
+              <% } %>
+          </select>
+        </div>
+        <div class="select">
+          <select name="" id="">
+            <option value="">เทอม</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>
+        </div>
+        <div class="select">
+          <select name="" id="">
+            <option value="">เซค</option>
+            <option value="morning">เช้า</option>
+            <option value="early">บ่าย</option>
           </select>
         </div>
         <input type="submit" value="View">
       </form>
-        <div class="table-container">
+        <div class="table-container mt-5">
             <table class="table is-bordered">
                 <thead>
                     <tr>
-                        <th>No.</th>
-                        <th>Username</th>
-                        <th>Userlevel</th>
+                        <th>รหัสนักศึกษา</th>
+                        <th>ชื่อ</th>
+                        <th>นามสกุล</th>
+                        <th>อีเมล์</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% if (userData.length != 0) {
+                  <tr>
+                    <td>59070150</td>
+                    <td>วชิรวิทย์</td>
+                    <td>วรารักษ์</td>
+                    <td>59070150@it.kmitl.ac.th</td>
+                  </tr>
+                  <tr>
+                    <td>59070151</td>
+                    <td>วชิระ</td>
+                    <td>ดวงจิตร</td>
+                    <td>59070151@it.kmitl.ac.th</td>
+                  </tr>
+                  <tr>
+                    <td>59070152</td>
+                    <td>วรพงษ์</td>
+                    <td>วิเศษมาตย์</td>
+                    <td>59070152@it.kmitl.ac.th</td>
+                  </tr>
+                    <!-- <% if (userData.length != 0) {
                         var i = 1;
                         userData.forEach(function(data) {
                     %>
@@ -110,16 +71,16 @@
                         <tr>
                             <td colspan="7">No Data Found</td>
                         </tr>
-                    <% } %>
+                    <% } %> -->
                 </tbody>
             </table>
         </div>
-        <div class="title is-3">Upload Studentlist</div>
+        <div class="title is-3">อัพโหลดรายชื่อนักศึกษา</div>
         <form action="" method="POST">
           <div class="select">
             <select name="" id="">
               <option value="">ปีการศึกษา</option>
-              <% var year = 2564; %>
+              <% var year = 2554; %>
               <% for (let i = 0; i <= 10; i++) { %>
                 <option value="<% year; %>"><%= year; %></option>
                 <% year++; %>
@@ -147,5 +108,4 @@
         </form>
       </div>
   <% } %>
-</body>
-</html>
+<%- include('layouts/footer'); %>

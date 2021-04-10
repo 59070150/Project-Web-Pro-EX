@@ -1,132 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="/bulma/css/bulma.min.css">
-</head>
-<body>
-  <% if (userlevel != "admin") { %>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item">
-          <img src="/itkmitl.png" width="112" height="28">
-        </a>
-    
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-    
-      <div id="navbarBasic" class="navbar-menu">
-        <div class="navbar-start">
-          <a href="/home" class="navbar-item">
-            Home
-          </a>
-    
-          <a href="/progress" class="navbar-item">
-            Progress
-          </a>
-    
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              More
-            </a>
-    
-            <div class="navbar-dropdown">
-              <a class="navbar-item">
-                Report an issue
-              </a>
-            </div>
-          </div>
-        </div>
-    
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <p>Welcome <%= username %></p>
-          </div>
-          <div class="navbar-item">
-            <a href="/logout" class="button is-danger">Logout</a>
-          </div>
-        </div>
-      </div>
-    </nav>
+<%- include('layouts/header'); %>
+  <% if (!isAdmin) { %>
     <div class="container mt-5">
-      <div class="title is-1">Score Progress</div>
+      <div class="title is-1">ดูคะแนน</div>
+      <div class="title is-2">รหัสนักศึกษา : 59070150</div>
+      <form action="" method="post">
+        <div class="select">
+          <select name="" id="">
+            <option value="">สัปดาห์</option>
+            <% for (let i = 1; i <= 15; i++) { %>
+              <option value="<% i; %>">สัปดาห์ <%= i; %></option>
+            <% } %>
+          </select>
+        </div>
+        <input type="submit" value="ดูคะแนน">
+      </form>
+      <div class="table-container mt-5">
+        <table class="table is-bordered">
+            <thead>
+                <tr>
+                    <th>แบบฝึกหัด</th>
+                    <th>คะแนน</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>แบบฝึกหัด 1</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>แบบฝึกหัด 2</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>แบบฝึกหัด 3</td>
+                <td>100</td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+      <div class="title is-3">ความคิดเห็นของอาจารย์ผู้สอน</div>
+      <div class="message">ทำได้ดีแล้ว ขอให้พยายามพัฒนาตนเองต่อไปให้มากขึ้นกว่านี้</div>
     </div>
   <% } else { %>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item">
-          <img src="/itkmitl.png" width="112" height="28">
-        </a>
-    
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-    
-      <div id="navbarBasic" class="navbar-menu">
-        <div class="navbar-start">
-          <a href="/home" class="navbar-item">
-            Home
-          </a>
-
-          <a href="/semeter" class="navbar-item">
-            เลือกปีการศึกษาและเทอม
-          </a>
-    
-          <a href="/progress" class="navbar-item">
-            Progress for admin
-          </a>
-
-          <a href="/givescore" class="navbar-item">
-            Give Score
-          </a>
-
-          <a href="/studentlist" class="navbar-item">
-            Student List
-          </a>
-
-          <a href="/register" class="navbar-item">
-            User Management
-          </a>
-    
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              More
-            </a>
-    
-            <div class="navbar-dropdown">
-              <a class="navbar-item">
-                Report an issue
-              </a>
-            </div>
-          </div>
-        </div>
-    
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <p>Welcome <%= username %></p>
-          </div>
-
-          <div class="navbar-item">
-              <a href="/logout" class="button is-danger">
-                Logout
-              </a>
-          </div>
-        </div>
-      </div>
-    </nav>
     <div class="container mt-5">
-      <div class="title is-1">Progress for admin</div>
+      <div class="title is-1">ดูคะแนนสำหรับเจ้าหน้าที่</div>
+      <form action="" method="post">
+        <div class="select">
+          <select name="" id="">
+            <option value="">สัปดาห์</option>
+            <% for (let i = 1; i <= 15; i++) { %>
+              <option value="<% i; %>">สัปดาห์ <%= i; %></option>
+            <% } %>
+          </select>
+        </div>
+        <input type="submit" value="ดูคะแนน">
+      </form>
+      <div class="table-container mt-5">
+        <table class="table is-bordered">
+            <thead>
+                <tr>
+                    <th>รหัสนักศึกษา</th>
+                    <th>แบบฝึกหัด 1</th>
+                    <th>แบบฝึกหัด 2</th>
+                    <th>แบบฝึกหัด 3</th>
+                    <th>ความคิดเห็น</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>59070150</td>
+                <td>100</td>
+                <td>100</td>
+                <td>100</td>
+                <td>พยายามทำความเข้าใจให้มากกว่านี้</td>
+              </tr>
+              <tr>
+                <td>59070151</td>
+                <td>100</td>
+                <td>100</td>
+                <td>100</td>
+                <td>พยายามทำความเข้าใจให้มากกว่านี้ และลองทำในสิ่งที่ไม่เคยทำบ้างในบางครั้ง</td>
+              </tr>
+              <tr>
+                <td>59070152</td>
+                <td>100</td>
+                <td>100</td>
+                <td>100</td>
+                <td>ทำได้ดีแล้ว แต่ต้องมีปฏิสัมพันธ์กับเพื่อนๆบ้าง</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+      <div align="center"><button class="button is-primary mt-5">Export to excel</button> <button class="button is-danger mt-5">Export all to excel</button></div>
     </div>
   <% } %>
     
-</body>
-</html>
+<%- include('layouts/footer'); %>

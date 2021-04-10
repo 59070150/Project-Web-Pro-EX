@@ -1,0 +1,57 @@
+<%- include('layouts/header'); %>
+    <% if (isAdmin) { %>
+        <div class="container mt-5">
+            <div class="title is-1">ให้คะแนนต่อนักศึกษา</div>
+            <div class="title is-3">รหัสนักศึกษา : 5907015X</div>
+            <form action="" method="post">
+                <div class="table-container mb-5">
+                    <table class="table is-bordered">
+                        <thead>
+                            <tr>
+                                <th>แบบฝึกหัด</th>
+                                <th>ใส่คะแนน</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>แบบฝึกหัด 1</td>
+                            <td><input type="text"></td>
+                          </tr>
+                          <tr>
+                            <td>แบบฝึกหัด 2</td>
+                            <td><input type="text"></td>
+                          </tr>
+                          <tr>
+                            <td>แบบฝึกหัด 3</td>
+                            <td><input type="text"></td>
+                          </tr>
+                            <!-- <% if (userData.length != 0) {
+                                var i = 1;
+                                userData.forEach(function(data) {
+                            %>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            <% i++; }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="7">No Data Found</td>
+                                </tr>
+                            <% } %> -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="title is-3">เจ้าหน้าที่แสดงความคิดเห็นต่อนักศึกษา</div>
+                <div class="control">
+                  <textarea name="" id="" class="textarea"></textarea>
+                </div>
+                <div class="title is-3">อาจารย์แสดงความคิดเห็นต่อนักศึกษา</div>
+                <div class="control">
+                  <textarea name="" id="" class="textarea"></textarea>
+                </div>
+                <div align="center"><input class="button is-primary mt-5 mb-5" type="submit" value="บันทึก"> <a href="/givescore" class="button is-danger mt-5 mb-5">ยกเลิก</a></div>
+            </form>
+        </div>
+  <% } %>
+<%- include('layouts/footer'); %>

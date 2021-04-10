@@ -1,131 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class Week <%= week %></title>
-    <link rel="stylesheet" href="/bulma/css/bulma.min.css">
-</head>
-<body>
-  <% if (userlevel != "admin") { %>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="navbar-item">
-            <img src="/itkmitl.png" width="112" height="28">
-          </a>
-      
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-      
-        <div id="navbarBasic" class="navbar-menu">
-          <div class="navbar-start">
-            <a href="/home" class="navbar-item">
-              Home
-            </a>
-      
-            <a href="/progress" class="navbar-item">
-              Progress
-            </a>
-      
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                More
-              </a>
-      
-              <div class="navbar-dropdown">
-                <a class="navbar-item">
-                  Report an issue
-                </a>
-              </div>
-            </div>
-          </div>
-      
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <p>Welcome <%= username %></p>
-            </div>
-            <div class="navbar-item">
-              <a href="/login" class="button is-danger">Logout</a>
-            </div>
-          </div>
-        </div>
-      </nav>
-  <% } else { %>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item">
-          <img src="/itkmitl.png" width="112" height="28">
-        </a>
-    
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-    
-      <div id="navbarBasic" class="navbar-menu">
-        <div class="navbar-start">
-          <a href="/home" class="navbar-item">
-            Home
-          </a>
-
-          <a href="/semeter" class="navbar-item">
-            เลือกปีการศึกษาและเทอม
-          </a>
-    
-          <a href="/progress" class="navbar-item">
-            Progress for admin
-          </a>
-
-          <a href="/givescore" class="navbar-item">
-            Give Score
-          </a>
-
-          <a href="/studentlist" class="navbar-item">
-            Student List
-          </a>
-
-          <a href="/register" class="navbar-item">
-            User Management
-          </a>
-    
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              More
-            </a>
-    
-            <div class="navbar-dropdown">
-              <a class="navbar-item">
-                Report an issue
-              </a>
-            </div>
-          </div>
-        </div>
-    
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <p>Welcome <%= username %></p>
-          </div>
-
-          <div class="navbar-item">
-              <a href="/logout" class="button is-danger">
-                Logout
-              </a>
-          </div>
-        </div>
-      </div>
-    </nav>
-  <% } %>
+<%- include('layouts/header'); %>
   <div class="container mt-5">
-    <div class="title is-1">Class Week <%= week %></div>
-    <div class="title is-3">Description</div>
-    <div class="message">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas, beatae? Autem optio nisi architecto facilis nobis, distinctio dolore natus fuga.</div>
+    <div class="title is-1">ชั้นเรียนสัปดาห์ <%= week %></div>
+    <div class="image is-3by2">
+      <iframe class="has-ratio" width="480" height="320" src="https://www.youtube.com/embed/vVNC43qdfzY" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="table-container mt-5">
+      <table class="table is-bordered">
+        <thead>
+          <tr>
+            <th>ชื่อวิดีโอ</th>
+            <th>ลิ้งค์</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Async JS Part 1</td>
+            <td><a href="">ลิ้งค์</a></td>
+          </tr>
+          <tr>
+            <td>Async JS Part 2</td>
+            <td><a href="https://www.youtube.com/embed/vVNC43qdfzY">ลิ้งค์</a></td>
+          </tr>
+          <tr>
+            <td>Async JS Part 3</td>
+            <td><a href="">ลิ้งค์</a></td>
+          </tr>
+          <tr>
+            <td>Async JS Part 4</td>
+            <td><a href="">ลิ้งค์</a></td>
+          </tr>
+          <tr>
+            <td>Async JS Part 5</td>
+            <td><a href="">ลิ้งค์</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-container mt-5">
+      <table class="table is-bordered">
+        <thead>
+          <tr>
+            <th>เอกสารประกอบการสอน</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Async JS Part 1</td>
+          </tr>
+          <tr>
+            <td>Async JS Part 2</td>
+          </tr>
+          <tr>
+            <td>Async JS Part 3</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table is-bordered">
+        <thead>
+          <tr>
+            <th>ไฟล์โปรแกรมตัวอย่าง</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Async JS Part 1</td>
+          </tr>
+          <tr>
+            <td>Async JS Part 2</td>
+          </tr>
+          <tr>
+            <td>Async JS Part 3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="title is-3">คำอธิบาย</div>
+    <div class="message mb-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas, beatae? Autem optio nisi architecto facilis nobis, distinctio dolore natus fuga.</div>
   </div>
-</body>
-</html>
+<%- include('layouts/footer'); %>

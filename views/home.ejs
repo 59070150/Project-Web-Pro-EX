@@ -1,107 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="/bulma/css/bulma.min.css">
-</head>
-<body>
-  <% if (userlevel != "admin") { %>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item">
-          <img src="/itkmitl.png" width="112" height="28">
-        </a>
-    
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-    
-      <div id="navbarBasic" class="navbar-menu">
-        <div class="navbar-start">
-          <a href="/home" class="navbar-item">
-            Home
-          </a>
-    
-          <a href="/progress" class="navbar-item">
-            Progress
-          </a>
-    
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              More
-            </a>
-    
-            <div class="navbar-dropdown">
-              <a class="navbar-item">
-                Report an issue
-              </a>
-            </div>
-          </div>
-        </div>
-    
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <p>Welcome <%= username %></p>
-          </div>
-          <div class="navbar-item">
-            <a href="/logout" class="button is-danger">Logout</a>
-          </div>
-        </div>
-      </div>
-    </nav>
+<%- include('layouts/header'); %>
+  <% if (!isAdmin) { %>
     <div class="container mt-5">
-      <div class="title is-1">News</div>
+      <div class="title is-1">ข่าว</div>
       <div class="table-container">
         <table class="table is-fullwidth">
           <thead>
             <tr>
-              <th>News title</th>
+              <th>หัวข้อข่าว</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><a>Title 1</a></td>
-            </tr>
-            <tr>
-              <td><a>Title 2</a></td>
-            </tr>
+            <% if (newsData.length != 0) {
+              newsData.forEach(function(data) {
+            %>
+              <tr>
+                <td><a href="/news/<%= data.news_id %>"><%= data.news_title %></a></td>
+              </tr>
+              <% }) %>
+              <% } else { %>
+                  <tr>
+                    <td colspan="7">No Data Found</td>
+                  </tr>
+              <% } %>
           </tbody>
         </table>
       </div>
-      <div class="title is-2">Class Material</div>
+      <div class="title is-2">เอกสารประกอบการสอน</div>
       <div class="table-container">
         <table class="table is-bordered is-fullwidth">
           <thead>
             <tr>
-              <th>Class Week</th>
+              <th>ชั้นเรียน</th>
             </tr>
           </thead>
           <tbody>
             <% for (let i = 1; i <= 15; i++) { %>
               <tr>
-                <td><a href="/classWeek/<%= i; %>">Class Week <%= i; %></a></td>
+                <td><a href="/classWeek/<%= i; %>">ชั้นเรียนสัปดาห์ <%= i; %></a></td>
               </tr>
             <% } %>
           </tbody>
         </table>
       </div>
-      <div class="title is-2 mt-5">Exercise</div>
+      <div class="title is-2 mt-5">แบบฝึกหัด</div>
       <div class="table-container">
         <table class="table is-bordered is-fullwidth">
           <thead>
             <tr>
-              <th>Exercise Week</th>
+              <th>แบบฝึกหัด</th>
             </tr>
           </thead>
           <tbody>
             <% for (let i = 1; i <= 15; i++) { %>
               <tr>
-                <td><a href="/exWeek/<%= i; %>">Exercise Week <%= i; %></a></td>
+                <td><a href="/exWeek/<%= i; %>">แบบฝึกหัดสัปดาห์ <%= i; %></a></td>
               </tr>
             <% } %>
           </tbody>
@@ -109,124 +61,69 @@
       </div>
     </div>
   <% } else { %>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item">
-          <img src="/itkmitl.png" width="112" height="28">
-        </a>
-    
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-    
-      <div id="navbarBasic" class="navbar-menu">
-        <div class="navbar-start">
-          <a href="/home" class="navbar-item">
-            Home
-          </a>
-
-          <a href="/semeter" class="navbar-item">
-            เลือกปีการศึกษาและเทอม
-          </a>
-    
-          <a href="/progress" class="navbar-item">
-            Progress for admin
-          </a>
-
-          <a href="/givescore" class="navbar-item">
-            Give Score
-          </a>
-
-          <a href="/studentlist" class="navbar-item">
-            Student List
-          </a>
-
-          <a href="/register" class="navbar-item">
-            User Management
-          </a>
-    
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              More
-            </a>
-    
-            <div class="navbar-dropdown">
-              <a class="navbar-item">
-                Report an issue
-              </a>
-            </div>
-          </div>
-        </div>
-    
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <p>Welcome <%= username %></p>
-          </div>
-
-          <div class="navbar-item">
-              <a href="/logout" class="button is-danger">
-                Logout
-              </a>
-          </div>
-        </div>
-      </div>
-    </nav>
     <div class="container mt-5">
-      <div class="title is-1">Manage News</div>
+      <div class="title is-1">จัดการข่าว</div>
       <div class="table-container">
         <table class="table is-fullwidth">
           <thead>
             <tr>
-              <th>News title</th>
+              <th>หัวข้อข่าว</th>
+              <th align="center">แก้ไข</th>
+              <th align="center">ลบข่าว</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><a>Title 1</a></td>
-            </tr>
-            <tr>
-              <td><a>Title 2</a></td>
-            </tr>
+            <% if (newsData.length != 0) {
+                    newsData.forEach(function(data) {
+              %>
+                    <tr>
+                      <td><a href="/news/<%= data.news_id %>"><%= data.news_title %></a></td>
+                      <td align="center"><a href="/editnews/<%= data.news_id %>">Edit</a></td>
+                      <td align="center"><a href="/deletenews/<%= data.news_id %>">ลบ</a></td>
+                    </tr>
+                    <% }) %>
+                    <% } else { %>
+                        <tr>
+                          <td colspan="7">No Data Found</td>
+                        </tr>
+                    <% } %>
           </tbody>
         </table>
       </div>
-      <div align="center"><a href="/editnews" class="button is-primary">Edit News</a></div>
-      <div class="title is-2">Manage Class Material</div>
+      <div align="center"><a href="/addnews" class="button is-primary">เพิ่มข่าว</a></div>
+      <div class="title is-2">จัดการเอกสารประกอบการสอน</div>
       <div class="table-container">
         <table class="table is-bordered is-fullwidth">
           <thead>
             <tr>
-              <th>Class Week</th>
-              <th align="center">Edit</th>
+              <th>ชั้นเรียน</th>
+              <th align="center">แก้ไข</th>
             </tr>
           </thead>
           <tbody>
             <% for (let i = 1; i <= 15; i++) { %>
               <tr>
-                <td><a href="/classWeek/<%= i; %>">Class Week <%= i; %></a></td>
-                <td align="center"><a href="/editClass/<%= i; %>">Edit</a></td>
+                <td><a href="/classWeek/<%= i; %>">ชั้นเรียนสัปดาห์ <%= i; %></a></td>
+                <td align="center"><a href="/editClass/<%= i; %>">แก้ไข</a></td>
               </tr>
             <% } %>
           </tbody>
         </table>
       </div>
-      <div class="title is-2 mt-5">Manege Exercise</div>
+      <div class="title is-2 mt-5">จัดการแบบฝึกหัด</div>
       <div class="table-container">
         <table class="table is-bordered is-fullwidth">
           <thead>
             <tr>
-              <th>Exercise Week</th>
-              <th align="center">Edit</th>
+              <th>แบบฝึกหัด</th>
+              <th align="center">แก้ไข</th>
             </tr>
           </thead>
           <tbody>
             <% for (let i = 1; i <= 15; i++) { %>
               <tr>
-                <td><a href="/exWeek/<%= i; %>">Exercise Week <%= i; %></a></td>
-                <td align="center"><a href="/editEx/<%= i; %>">Edit</a></td>
+                <td><a href="/exWeek/<%= i; %>">แบบฝึกหัดสัปดาห์ <%= i; %></a></td>
+                <td align="center"><a href="/editEx/<%= i; %>">แก้ไข</a></td>
               </tr>
             <% } %>
           </tbody>
@@ -234,6 +131,4 @@
       </div>
       </div>
   <% } %>
-    
-</body>
-</html>
+<%- include('layouts/footer'); %>
