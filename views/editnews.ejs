@@ -1,9 +1,11 @@
 <%- include('layouts/header'); %>
-        <div class="container mt-5">
+      <section class="section">
+        <div class="container">
             <div class="title is-1"><%= title %></div>
             <form action="/editnews/<%= newsId %>" method="post">
               <textarea name="newscontent" id="editor"><%- content %></textarea>
               <div align="center"><button id="submit" class="button is-primary mt-5 mb-5" type="submit">บันทึก</button> <a href="/home" class="button is-danger mt-5 mb-5">ยกเลิก</a></div>
             </form>
         </div>
+      </section>
 <%- include('layouts/footer'); %>

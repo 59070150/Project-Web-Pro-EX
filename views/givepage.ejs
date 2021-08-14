@@ -1,6 +1,7 @@
 <%- include('layouts/header'); %>
     <% if (isAdmin) { %>
-        <div class="container mt-5">
+      <section class="section">
+        <div class="container">
             <div class="title is-1">ให้คะแนนต่อนักศึกษา</div>
             <div class="title is-3">รหัสนักศึกษา : 5907015X</div>
             <form action="" method="post">
@@ -53,5 +54,6 @@
                 <div align="center"><input class="button is-primary mt-5 mb-5" type="submit" value="บันทึก"> <a href="/givescore" class="button is-danger mt-5 mb-5">ยกเลิก</a></div>
             </form>
         </div>
+      </section>
   <% } %>
 <%- include('layouts/footer'); %>

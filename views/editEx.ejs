@@ -1,54 +1,56 @@
 <%- include('layouts/header'); %>
   <% if (isAdmin) { %>
-    <div class="container mt-5">
-      <div class="title is-1">แก้ไขแบบฝึกหัดสัปดาห์ <%= week %></div>
-      <form action="" method="POST">
-        <div class="title is-3">เขียนคำอธิบาย</div>
-        <div class="control">
-          <textarea name="" id="" class="textarea" placeholder="Write Description"></textarea>
-        </div>
-        <div class="title is-3 mt-5">อัพโหลดรูป ที่นี่</div>
-        <div class="block">
-          <input type="file" accept="image/*" onchange="preview_image(event)">
-              <div class="card">
-                <div class="card image">
-                  <div class="image is-128x128">
-                    <img id="output_image">
+    <section class="section">
+      <div class="container">
+        <div class="title is-1">แก้ไขแบบฝึกหัดสัปดาห์ <%= week %></div>
+        <form action="" method="POST">
+          <div class="title is-3">เขียนคำอธิบาย</div>
+          <div class="control">
+            <textarea name="" id="" class="textarea" placeholder="Write Description"></textarea>
+          </div>
+          <div class="title is-3 mt-5">อัพโหลดรูป ที่นี่</div>
+          <div class="block">
+            <input type="file" accept="image/*" onchange="preview_image(event)">
+                <div class="card">
+                  <div class="card image">
+                    <div class="image is-128x128">
+                      <img id="output_image">
+                    </div>
                   </div>
                 </div>
-              </div>
-        </div>
-        <div class="title is-3 mt-5">เพิ่มลิงค์ Github แบบฝึกหัด </div>
-        <input class="input" type="text" placeholder="Exercise Github Link">
-        <div class="title is-3 mt-5">เพิ่มลิงค์ Github เฉลยแบบฝึกหัด </div>
-        <input class="input" type="text" placeholder="Solution Github Link">
-        <p class="mt-3">ตั้งวันที่แสดงลิงค์เฉลยแบบฝึกหัด : <input type="date" class="Date" id=""></p>
-        <div class="title is-3 mt-5">Add Exercise</div>
-        <div class="table-container">
-          <table class="table is-bordered" id="ExTable1">
-            <thead>
+          </div>
+          <div class="title is-3 mt-5">เพิ่มลิงค์ Github แบบฝึกหัด </div>
+          <input class="input" type="text" placeholder="Exercise Github Link">
+          <div class="title is-3 mt-5">เพิ่มลิงค์ Github เฉลยแบบฝึกหัด </div>
+          <input class="input" type="text" placeholder="Solution Github Link">
+          <p class="mt-3">ตั้งวันที่แสดงลิงค์เฉลยแบบฝึกหัด : <input type="date" class="Date" id=""></p>
+          <div class="title is-3 mt-5">Add Exercise</div>
+          <div class="table-container">
+            <table class="table is-bordered" id="ExTable1">
+              <thead>
+                    <tr>
+                      <th>เพิ่มแถว</th>
+                      <th>เพิ่มหัวข้อแบบฝึกหัด</th>
+                      <th>เพิ่มคำอธิบายแบบฝึกหัด</th>
+                      <th>เพิ่มคะแนน</th>
+                      <th>ลบแถว</th>
+                    </tr>
+              </thead>
+              <tbody>
                   <tr>
-                    <th>เพิ่มแถว</th>
-                    <th>เพิ่มหัวข้อแบบฝึกหัด</th>
-                    <th>เพิ่มคำอธิบายแบบฝึกหัด</th>
-                    <th>เพิ่มคะแนน</th>
-                    <th>ลบแถว</th>
+                      <td><button type="button" onclick="addRows()">+</button></td>
+                      <td><input type="text"></td>
+                      <td><textarea name="" id="" cols="30" rows="3"></textarea></td>
+                      <td><input type="text"></td>
+                      <td></td>
                   </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><button type="button" onclick="addRows()">+</button></td>
-                    <td><input type="text"></td>
-                    <td><textarea name="" id="" cols="30" rows="3"></textarea></td>
-                    <td><input type="text"></td>
-                    <td></td>
-                </tr>
-            </tbody>
-          </table>
-        </div>
-        <div align="center"><button type="submit" class="button is-primary mt-5 mb-5">บันทึก</button> <a href="/home" class="button is-danger mt-5 mb-5">ยกเลิก</a></div>
-      </form>
-    </div>
+              </tbody>
+            </table>
+          </div>
+          <div align="center"><button type="submit" class="button is-primary mt-5 mb-5">บันทึก</button> <a href="/home" class="button is-danger mt-5 mb-5">ยกเลิก</a></div>
+        </form>
+      </div>
+    </section>
   <% } %>
 
       <script type="text/javascript">

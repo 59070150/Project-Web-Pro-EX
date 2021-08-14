@@ -1,90 +1,16 @@
 <%- include('layouts/header'); %>
   <% if (isAdmin) { %>
-    <div class="container mt-5">
-      <div class="title is-1">รายชื่อนักศึกษา</div>
-      <form action="/studentlist" method="POST">
-        <div class="select">
-          <select name="year">
-            <% var year = 2554; %>
-              <% for (let i = 0; i <= 10; i++) { %>
-                <option value="<% year; %>"><%= year; %></option>
-                <% year++; %>
-              <% } %>
-          </select>
-        </div>
-        <div class="select">
-          <select name="" id="">
-            <option value="">เทอม</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-          </select>
-        </div>
-        <div class="select">
-          <select name="" id="">
-            <option value="">เซค</option>
-            <option value="morning">เช้า</option>
-            <option value="early">บ่าย</option>
-          </select>
-        </div>
-        <input type="submit" value="View">
-      </form>
-        <div class="table-container mt-5">
-            <table class="table is-bordered">
-                <thead>
-                    <tr>
-                        <th>รหัสนักศึกษา</th>
-                        <th>ชื่อ</th>
-                        <th>นามสกุล</th>
-                        <th>อีเมล์</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>59070150</td>
-                    <td>วชิรวิทย์</td>
-                    <td>วรารักษ์</td>
-                    <td>59070150@it.kmitl.ac.th</td>
-                  </tr>
-                  <tr>
-                    <td>59070151</td>
-                    <td>วชิระ</td>
-                    <td>ดวงจิตร</td>
-                    <td>59070151@it.kmitl.ac.th</td>
-                  </tr>
-                  <tr>
-                    <td>59070152</td>
-                    <td>วรพงษ์</td>
-                    <td>วิเศษมาตย์</td>
-                    <td>59070152@it.kmitl.ac.th</td>
-                  </tr>
-                    <!-- <% if (userData.length != 0) {
-                        var i = 1;
-                        userData.forEach(function(data) {
-                    %>
-                        <tr>
-                            <td><%= i; %></td>
-                            <td><%= data.username %></td>
-                            <td><%= data.userlevel %></td>
-                        </tr>
-                    <% i++; }) %>
-                    <% } else { %>
-                        <tr>
-                            <td colspan="7">No Data Found</td>
-                        </tr>
-                    <% } %> -->
-                </tbody>
-            </table>
-        </div>
-        <div class="title is-3">อัพโหลดรายชื่อนักศึกษา</div>
-        <form action="" method="POST">
+    <section class="section">
+      <div class="container">
+        <div class="title is-1">รายชื่อนักศึกษา</div>
+        <form action="/studentlist" method="POST">
           <div class="select">
-            <select name="" id="">
-              <option value="">ปีการศึกษา</option>
+            <select name="year">
               <% var year = 2554; %>
-              <% for (let i = 0; i <= 10; i++) { %>
-                <option value="<% year; %>"><%= year; %></option>
-                <% year++; %>
-              <% } %>
+                <% for (let i = 0; i <= 10; i++) { %>
+                  <option value="<% year; %>"><%= year; %></option>
+                  <% year++; %>
+                <% } %>
             </select>
           </div>
           <div class="select">
@@ -96,16 +22,92 @@
           </div>
           <div class="select">
             <select name="" id="">
-              <option value="">Section</option>
-              <option value="">เช้า</option>
-              <option value="">บ่าย</option>
+              <option value="">เซค</option>
+              <option value="morning">เช้า</option>
+              <option value="early">บ่าย</option>
             </select>
           </div>
-          <div class="file">
-            <input type="file" name="" id="">
-          </div>
-          <input type="submit" value="Upload">
+          <input type="submit" value="View">
         </form>
-      </div>
+          <div class="table-container mt-5">
+              <table class="table is-bordered">
+                  <thead>
+                      <tr>
+                          <th>รหัสนักศึกษา</th>
+                          <th>ชื่อ</th>
+                          <th>นามสกุล</th>
+                          <th>อีเมล์</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>59070150</td>
+                      <td>วชิรวิทย์</td>
+                      <td>วรารักษ์</td>
+                      <td>59070150@it.kmitl.ac.th</td>
+                    </tr>
+                    <tr>
+                      <td>59070151</td>
+                      <td>วชิระ</td>
+                      <td>ดวงจิตร</td>
+                      <td>59070151@it.kmitl.ac.th</td>
+                    </tr>
+                    <tr>
+                      <td>59070152</td>
+                      <td>วรพงษ์</td>
+                      <td>วิเศษมาตย์</td>
+                      <td>59070152@it.kmitl.ac.th</td>
+                    </tr>
+                      <!-- <% if (userData.length != 0) {
+                          var i = 1;
+                          userData.forEach(function(data) {
+                      %>
+                          <tr>
+                              <td><%= i; %></td>
+                              <td><%= data.username %></td>
+                              <td><%= data.userlevel %></td>
+                          </tr>
+                      <% i++; }) %>
+                      <% } else { %>
+                          <tr>
+                              <td colspan="7">No Data Found</td>
+                          </tr>
+                      <% } %> -->
+                  </tbody>
+              </table>
+          </div>
+          <div class="title is-3">อัพโหลดรายชื่อนักศึกษา</div>
+          <form action="" method="POST">
+            <div class="select">
+              <select name="" id="">
+                <option value="">ปีการศึกษา</option>
+                <% var year = 2554; %>
+                <% for (let i = 0; i <= 10; i++) { %>
+                  <option value="<% year; %>"><%= year; %></option>
+                  <% year++; %>
+                <% } %>
+              </select>
+            </div>
+            <div class="select">
+              <select name="" id="">
+                <option value="">เทอม</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </div>
+            <div class="select">
+              <select name="" id="">
+                <option value="">Section</option>
+                <option value="">เช้า</option>
+                <option value="">บ่าย</option>
+              </select>
+            </div>
+            <div class="file">
+              <input type="file" name="" id="">
+            </div>
+            <input type="submit" value="Upload">
+          </form>
+        </div>
+    </section>
   <% } %>
 <%- include('layouts/footer'); %>

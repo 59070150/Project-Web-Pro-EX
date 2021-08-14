@@ -1,9 +1,11 @@
 <%- include('layouts/header'); %>
-      <div class="container mt-5">
+    <% if (isAdmin) { %>
+      <section class="section">
+        <div class="container">
           <div class="message is-success">
             <p> <%=(typeof alertMsg!='undefined')? alertMsg:''%> </p>
           </div>
-          <div class="title is-1">จัดการผู้ใช้งาน</div>
+          <div class="title is-1">สมัครผู้ใช้งาน</div>
           <div class="title is-3">เพิ่มเจ้าหน้าที่ในระบบ</div>
           <form action="/register" method="POST">
             <div class="field">
@@ -32,5 +34,7 @@
             </div>
             <input type="submit" value="สมัคร">
           </form>
-      </div>
+        </div>
+      </section>
+    <% } %>
 <%- include('layouts/footer'); %>

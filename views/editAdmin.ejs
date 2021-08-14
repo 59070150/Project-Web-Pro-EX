@@ -1,0 +1,52 @@
+<%- include('layouts/header'); %>
+    <% if (isAdmin) { %>
+        <section class="section">
+            <div class="container">
+                <div class="title is-1">จัดการผู้ใช้งาน</div>
+                <form action="/editAdmin" method="POST">
+                    <div class="field">
+                        <label class="label">แก้ไขชื่อผู้ใช้งาน</label>
+                        <div class="control">
+                          <input class="input" type="text" id="username" name="username">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">แก้ไขรหัสผ่าน</label>
+                        <div class="control">
+                          <input class="input" type="password" id="password" name="password">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">แก้ไขชื่อจริง</label>
+                        <div class="control">
+                          <input class="input" type="text" id="firstname" name="firstname">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">แก้ไขนามสกุล</label>
+                        <div class="control">
+                          <input class="input" type="text" id="lastname" name="lastname">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">เลือกระดับผู้ใช้งาน</label>
+                        <div class="select">
+                          <select name="isadmin">
+                              <option value="">ระดับผู้ใช้งาน</option>
+                              <option value=1>เจ้าหน้าที่</option>
+                              <option value=0>นักศึกษา</option>
+                          </select>
+                        </div>
+                    </div>
+                    <input class="button is-success" type="submit" value="แก้ไข"><a href="/admin" class="button is-danger">กลับ</a>
+                </form>
+            </div>
+        </section>
+    <% } %>
+    <script text="javascript">
+        document.getElementById('username').value = "<%= uname %>";
+        document.getElementById('password').value = "<%= pass %>";
+        document.getElementById('firstname').value = "<%= fname %>";
+        document.getElementById('lastname').value = "<%= lname %>";
+    </script>
+<%- include('layouts/footer'); %>

@@ -1,6 +1,7 @@
 <%- include('layouts/header'); %>
-    <div class="container mt-5">
-        <div class="title is-1">เลือกปีการศึกษาและเทอม</div>
+  <section class="section">
+    <div class="container">
+      <div class="title is-1">เลือกปีการศึกษาและเทอม</div>
         <div class="message is-success">
           <p> <%=(typeof alertMsg!='undefined')? alertMsg:''%> </p>
         </div>
@@ -9,10 +10,13 @@
           <div class="select">
             <select name="year" id="year">
               <option value="">ปีการศึกษา</option>
-              <% var year = 2554; %>
-              <% for (let i = 0; i <= 10; i++) { %>
-                <option value="<% year; %>"><%= year; %></option>
-                <% year++; %>
+              <% if (userData.length != 0) {
+                userData.forEach(function(data) {
+              %>
+                <option value="<%= data.year; %>"><%= data.year; %></option>
+              <% }) %>
+              <% } else { %>
+                <option value="">Data not found!!!</option>
               <% } %>
             </select>
           </div>
@@ -25,4 +29,6 @@
           </div>
           <input type="submit" value="Apply">
         </form>
+    </div>
+  </section>
 <%- include('layouts/footer'); %>
