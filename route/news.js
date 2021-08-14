@@ -74,7 +74,7 @@ router.get('/news/:id', (req, res) => {
 router.get('/deletenews/:id', (req, res) => {
 	const { id } = req.params;
 	let newsId = parseInt(id);
-	connection.query('DELETE FROM news WHERE news_id = ?', [newsId] ,function(error, results, fields) {
+	connection.query('DELETE FROM news WHERE news_id = ?',[newsId] ,function(error, results, fields) {
 		if (error) throw error;
 		res.redirect('/home');
 	})

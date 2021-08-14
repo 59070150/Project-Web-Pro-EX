@@ -5,7 +5,9 @@ router = express.Router();
 
 router.get('/semeter', (req, res) => {
 	if (req.session.loggedin == true) {
-		res.render('semeter');
+		connection.query('SELECT DISTINCT year FROM semeter', function(error, results, fields) {
+			res.render('semeter', {userData: results});
+		})
 	} else {
 	  res.send('Please login to view this page!');
   }
