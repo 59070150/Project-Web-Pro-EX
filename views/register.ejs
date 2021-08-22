@@ -1,39 +1,45 @@
 <%- include('layouts/header'); %>
     <% if (isAdmin) { %>
-      <section class="section">
-        <div class="container">
-          <div class="message is-success">
-            <p> <%=(typeof alertMsg!='undefined')? alertMsg:''%> </p>
+      <section class="section hero is-warning">
+        <div class="hero-body">
+          <div class="container">
+            <div class="message is-success">
+              <p> <%=(typeof alertMsg!='undefined')? alertMsg:''%> </p>
+            </div>
+            <div class="columns">
+              <div class="title is-1">สมัครผู้ใช้งาน</div>
+            </div>
+            <div class="columns">
+              <div class="title is-3">เพิ่มเจ้าหน้าที่ในระบบ</div>
+            </div>
+            <form action="/register" method="POST">
+              <div class="field">
+                <label class="label">ชื่อผู้ใช้งาน</label>
+                <div class="control">
+                  <input class="input" type="text" id="username" name="username" placeholder="Insert username" required>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">รหัสผ่าน</label>
+                <div class="control">
+                  <input class="input" type="password" id="password" name="password" placeholder="Insert password" required>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">ชื่อจริง</label>
+                <div class="control">
+                  <input class="input" type="text" id="firstname" name="firstname" placeholder="Insert firstname" required>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">นามสกุล</label>
+                <div class="control">
+                  <input class="input" type="text" id="lastname" name="lastname" placeholder="Insert lastname" required>
+                </div>
+              </div>
+              <input type="submit" value="สมัคร">
+            </form>
           </div>
-          <div class="title is-1">สมัครผู้ใช้งาน</div>
-          <div class="title is-3">เพิ่มเจ้าหน้าที่ในระบบ</div>
-          <form action="/register" method="POST">
-            <div class="field">
-              <label class="label">ชื่อผู้ใช้งาน</label>
-              <div class="control">
-                <input class="input" type="text" id="username" name="username" placeholder="Insert username" required>
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">รหัสผ่าน</label>
-              <div class="control">
-                <input class="input" type="password" id="password" name="password" placeholder="Insert password" required>
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">ชื่อจริง</label>
-              <div class="control">
-                <input class="input" type="text" id="firstname" name="firstname" placeholder="Insert firstname" required>
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">นามสกุล</label>
-              <div class="control">
-                <input class="input" type="text" id="lastname" name="lastname" placeholder="Insert lastname" required>
-              </div>
-            </div>
-            <input type="submit" value="สมัคร">
-          </form>
         </div>
       </section>
     <% } %>

@@ -1,9 +1,14 @@
 <%- include('layouts/header'); %>
     <% if (isAdmin) { %>
-      <section class="section">
-        <div class="container">
-            <div class="title is-1">ให้คะแนนต่อนักศึกษา</div>
-            <div class="title is-3">รหัสนักศึกษา : 5907015X</div>
+      <section class="section hero is-warning">
+        <div class="hero-body">
+          <div class="container">
+            <div class="columns">
+              <div class="title is-1">ให้คะแนนต่อนักศึกษา</div>
+            </div>
+            <div class="columns">
+              <div class="title is-3">รหัสนักศึกษา : 5907015X</div>
+            </div>
             <form action="" method="post">
                 <div class="table-container mb-5">
                     <table class="table is-bordered">
@@ -45,7 +50,7 @@
                 </div>
                 <div class="title is-3">เจ้าหน้าที่แสดงความคิดเห็นต่อนักศึกษา</div>
                 <div class="control">
-                  <textarea name="" id="" class="textarea"></textarea>
+                  <textarea name="" id="" class="textarea mb-5"></textarea>
                 </div>
                 <div class="title is-3">อาจารย์แสดงความคิดเห็นต่อนักศึกษา</div>
                 <div class="control">
@@ -53,6 +58,7 @@
                 </div>
                 <div align="center"><input class="button is-primary mt-5 mb-5" type="submit" value="บันทึก"> <a href="/givescore" class="button is-danger mt-5 mb-5">ยกเลิก</a></div>
             </form>
+          </div>
         </div>
       </section>
   <% } %>

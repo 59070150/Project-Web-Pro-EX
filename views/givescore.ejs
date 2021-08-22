@@ -1,8 +1,11 @@
 <%- include('layouts/header'); %>
   <% if (isAdmin) { %>
-      <section class="section">
-        <div class="container">
-            <div class="title is-1">Give Score</div>
+      <section class="section hero is-success">
+        <div class="hero-body">
+          <div class="container">
+            <div class="columns">
+              <div class="title is-1">Give Score</div>
+            </div>
             <form action="" method="post">
                 <div class="select">
                     <select name="" id="">
@@ -21,7 +24,8 @@
                 </div>
                 <input type="submit" value="Choose">
             </form>
-            <div class="table-container mt-5">
+            <div class="columns">
+              <div class="table-container column mt-5">
                 <table class="table is-bordered">
                     <thead>
                         <tr>
@@ -63,7 +67,9 @@
                         <% } %> -->
                     </tbody>
                 </table>
+              </div>
             </div>
+          </div>
         </div>
       </section>
   <% } %>

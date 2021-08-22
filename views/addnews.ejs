@@ -1,7 +1,11 @@
 <%- include('layouts/header'); %>
     <% if (isAdmin) { %>
-        <div class="container">
-            <div class="title is-1">เพิ่มข่าว</div>
+      <section class="section hero is-success">
+        <div class="hero-body">
+          <div class="container">
+            <div class="columns">
+              <div class="title is-1">เพิ่มข่าว</div>
+            </div>
             <div class="message is-success">
               <p> <%=(typeof alertMsg!='undefined')? alertMsg:''%> </p>
             </div>
@@ -24,8 +28,10 @@
                 </div>
               </div>
               <textarea name="newscontent" id="editor" placeholder="เขียนข่าวที่นี่"></textarea>
-              <div align="center"><button id="submit" class="button is-primary mt-5 mb-5" type="submit">บันทึก</button> <a href="/home" class="button is-danger mt-5 mb-5">ยกเลิก</a></div>
+              <div align="center"><button id="submit" class="button is-warning mt-5 mb-5" type="submit">บันทึก</button> <a href="/home" class="button is-danger mt-5 mb-5">ยกเลิก</a></div>
             </form>
+          </div>
         </div>
+      </section>
     <% } %>
 <%- include('layouts/footer'); %>

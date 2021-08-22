@@ -1,136 +1,166 @@
 <%- include('layouts/header'); %>
   <% if (!isAdmin) { %>
-    <section class="section">
-      <div class="container">
-        <div class="title is-1">ข่าว</div>
-        <div class="table-container">
-          <table class="table is-fullwidth">
-            <thead>
-              <tr>
-                <th>หัวข้อข่าว</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% if (newsData.length != 0) {
-                newsData.forEach(function(data) {
-              %>
-                <tr>
-                  <td><a href="/news/<%= data.news_id %>"><%= data.news_title %></a></td>
-                </tr>
-              <% }) %>
-              <% } else { %>
-                <tr>
-                  <td colspan="7">No Data Found</td>
-                </tr>
-              <% } %>
-            </tbody>
-          </table>
-        </div>
-        <div class="title is-2">เอกสารประกอบการสอน</div>
-        <div class="table-container">
-          <table class="table is-bordered is-fullwidth">
-            <thead>
-              <tr>
-                <th>ชั้นเรียน</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% for (let i = 1; i <= 15; i++) { %>
-                <tr>
-                  <td><a href="/classWeek/<%= i; %>">ชั้นเรียนสัปดาห์ <%= i; %></a></td>
-                </tr>
-              <% } %>
-            </tbody>
-          </table>
-        </div>
-        <div class="title is-2 mt-5">แบบฝึกหัด</div>
-        <div class="table-container">
-          <table class="table is-bordered is-fullwidth">
-            <thead>
-              <tr>
-                <th>แบบฝึกหัด</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% for (let i = 1; i <= 15; i++) { %>
-                <tr>
-                  <td><a href="/exWeek/<%= i; %>">แบบฝึกหัดสัปดาห์ <%= i; %></a></td>
-                </tr>
-              <% } %>
-            </tbody>
-          </table>
+    <section class="hero is-success">
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns">
+            <div class="title is-1">ข่าว</div>
+          </div>
+          <div class="columns">
+            <div class="table-container column">
+              <table class="table is-bordered is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>หัวข้อข่าว</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if (newsData.length != 0) {
+                    newsData.forEach(function(data) {
+                  %>
+                    <tr>
+                      <td><a href="/news/<%= data.news_id %>"><%= data.news_title %></a></td>
+                    </tr>
+                  <% }) %>
+                  <% } else { %>
+                    <tr>
+                      <td colspan="7">No Data Found</td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="title is-2">เอกสารประกอบการสอน</div>
+          </div>
+          <div class="columns">
+            <div class="table-container column">
+              <table class="table is-bordered is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>ชั้นเรียน</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (let i = 1; i <= 15; i++) { %>
+                    <tr>
+                      <td><a href="/classWeek/<%= i; %>">ชั้นเรียนสัปดาห์ <%= i; %></a></td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="title is-2 mt-5">แบบฝึกหัด</div>
+          </div>
+          <div class="columns">
+            <div class="table-container column">
+              <table class="table is-bordered is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>แบบฝึกหัด</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (let i = 1; i <= 15; i++) { %>
+                    <tr>
+                      <td><a href="/exWeek/<%= i; %>">แบบฝึกหัดสัปดาห์ <%= i; %></a></td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   <% } else { %>
-    <section class="section">
-      <div class="container">
-        <div class="title is-1">จัดการข่าว</div>
-        <div class="table-container">
-          <table class="table is-fullwidth">
-            <thead>
-              <tr>
-                <th>หัวข้อข่าว</th>
-                <th align="center">แก้ไข</th>
-                <th align="center">ลบข่าว</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% if (newsData.length != 0) {
-                    newsData.forEach(function(data) {
-              %>
-                    <tr>
-                      <td><a href="/news/<%= data.news_id %>"><%= data.news_title %></a></td>
-                      <td align="center"><a href="/editnews/<%= data.news_id %>">Edit</a></td>
-                      <td align="center"><a href="/deletenews/<%= data.news_id %>">ลบ</a></td>
-                    </tr>
+    <section class="section hero is-success">
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns">
+            <div class="title is-1">จัดการข่าว</div>
+          </div>
+          <div class="columns">
+            <div class="table-container column">
+              <table class="table is-bordered is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>หัวข้อข่าว</th>
+                    <th align="center">แก้ไข</th>
+                    <th align="center">ลบข่าว</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if (newsData.length != 0) {
+                      newsData.forEach(function(data) {
+                  %>
+                      <tr>
+                        <td><a href="/news/<%= data.news_id %>"><%= data.news_title %></a></td>
+                        <td align="center"><a href="/editnews/<%= data.news_id %>">Edit</a></td>
+                        <td align="center"><a href="/deletenews/<%= data.news_id %>">ลบ</a></td>
+                      </tr>
                     <% }) %>
                     <% } else { %>
                         <tr>
                           <td colspan="7">No Data Found</td>
                         </tr>
                     <% } %>
-            </tbody>
-          </table>
-        </div>
-        <div align="center"><a href="/addnews" class="button is-primary">เพิ่มข่าว</a></div>
-        <div class="title is-2">จัดการเอกสารประกอบการสอน</div>
-        <div class="table-container">
-          <table class="table is-bordered is-fullwidth">
-            <thead>
-              <tr>
-                <th>ชั้นเรียน</th>
-                <th align="center">แก้ไข</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% for (let i = 1; i <= 15; i++) { %>
-                <tr>
-                  <td><a href="/classWeek/<%= i; %>">ชั้นเรียนสัปดาห์ <%= i; %></a></td>
-                  <td align="center"><a href="/editClass/<%= i; %>">แก้ไข</a></td>
-                </tr>
-              <% } %>
-            </tbody>
-          </table>
-        </div>
-        <div class="title is-2 mt-5">จัดการแบบฝึกหัด</div>
-        <div class="table-container">
-          <table class="table is-bordered is-fullwidth">
-            <thead>
-              <tr>
-                <th>แบบฝึกหัด</th>
-                <th align="center">แก้ไข</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% for (let i = 1; i <= 15; i++) { %>
-                <tr>
-                  <td><a href="/exWeek/<%= i; %>">แบบฝึกหัดสัปดาห์ <%= i; %></a></td>
-                  <td align="center"><a href="/editEx/<%= i; %>">แก้ไข</a></td>
-                </tr>
-              <% } %>
-            </tbody>
-          </table>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column" align="center"><a href="/addnews" class="button is-link">เพิ่มข่าว</a></div>
+          </div>
+          <div class="columns">
+            <div class="title is-2">จัดการเอกสารประกอบการสอน</div>
+          </div>
+          <div class="columns">
+            <div class="table-container column">
+              <table class="table is-bordered is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>ชั้นเรียน</th>
+                    <th align="center">แก้ไข</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (let i = 1; i <= 15; i++) { %>
+                    <tr>
+                      <td><a href="/classWeek/<%= i; %>">ชั้นเรียนสัปดาห์ <%= i; %></a></td>
+                      <td align="center"><a href="/editClass/<%= i; %>">แก้ไข</a></td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="title is-2 mt-5">จัดการแบบฝึกหัด</div>
+          </div>
+          <div class="columns">
+            <div class="table-container column">
+              <table class="table is-bordered is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>แบบฝึกหัด</th>
+                    <th align="center">แก้ไข</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (let i = 1; i <= 15; i++) { %>
+                    <tr>
+                      <td><a href="/exWeek/<%= i; %>">แบบฝึกหัดสัปดาห์ <%= i; %></a></td>
+                      <td align="center"><a href="/editEx/<%= i; %>">แก้ไข</a></td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </section>

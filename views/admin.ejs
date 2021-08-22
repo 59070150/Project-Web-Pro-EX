@@ -1,41 +1,47 @@
 <%- include('layouts/header'); %>
     <% if (isAdmin) { %>
-        <section class="section">
-            <div class="container">
-                <div class="title is-1">จัดการผู้ใช้งาน</div>
-                <div class="table-container mt-5">
-                    <table class="table is-bordered">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Username</th>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% if (userData.length != 0) {
-                            var i = 1;
-                            userData.forEach(function(data) {
-                            %>
-                            <tr>
-                                <td><%= i; %></td>
-                                <td><%= data.username %></td>
-                                <td><%= data.firstname %></td>
-                                <td><%= data.lastname %></td>
-                                <td><a href="/editAdmin/<%= data.user_id %>">Edit</a></td>
-                                <td><a href="/delAdmin/<%= data.user_id %>">ลบ</a></td>
-                            </tr>
-                        <% i++; }) %>
-                        <% } else { %>
-                            <tr>
-                                <td colspan="7">No Data Found</td>
-                            </tr>
-                        <% } %>
-                        </tbody>
-                    </table>
+        <section class="section hero is-success">
+            <div class="hero-body">
+                <div class="container">
+                    <div class="columns">
+                        <div class="title is-1">จัดการผู้ใช้งาน</div>
+                    </div>
+                    <div class="columns">
+                        <div class="table-container column">
+                            <table class="table is-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Username</th>
+                                        <th>Firstname</th>
+                                        <th>Lastname</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if (userData.length != 0) {
+                                    var i = 1;
+                                    userData.forEach(function(data) {
+                                    %>
+                                    <tr>
+                                        <td><%= i; %></td>
+                                        <td><%= data.username %></td>
+                                        <td><%= data.firstname %></td>
+                                        <td><%= data.lastname %></td>
+                                        <td><a href="/editAdmin/<%= data.user_id %>">Edit</a></td>
+                                        <td><a href="/delAdmin/<%= data.user_id %>">ลบ</a></td>
+                                    </tr>
+                                <% i++; }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="7">No Data Found</td>
+                                    </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

@@ -1,34 +1,38 @@
 <%- include('layouts/header'); %>
-  <section class="section">
-    <div class="container">
-      <div class="title is-1">เลือกปีการศึกษาและเทอม</div>
-        <div class="message is-success">
-          <p> <%=(typeof alertMsg!='undefined')? alertMsg:''%> </p>
+  <section class="section hero is-warning">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns">
+          <div class="title is-1">เลือกปีการศึกษาและเทอม</div>
         </div>
-        <form action="/semeter" method="POST">
-          <div class="title is-3">ปีการศึกษาและเทอม</div>
-          <div class="select">
-            <select name="year" id="year">
-              <option value="">ปีการศึกษา</option>
-              <% if (userData.length != 0) {
-                userData.forEach(function(data) {
-              %>
-                <option value="<%= data.year; %>"><%= data.year; %></option>
-              <% }) %>
-              <% } else { %>
-                <option value="">Data not found!!!</option>
-              <% } %>
-            </select>
+          <div class="message is-success">
+            <p> <%=(typeof alertMsg!='undefined')? alertMsg:''%> </p>
           </div>
-          <div class="select">
-            <select name="semeter" id="semeter">
-              <option value="">เทอม</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-            </select>
-          </div>
-          <input type="submit" value="Apply">
-        </form>
+          <form action="/semeter" method="POST">
+            <div class="title is-3">ปีการศึกษาและเทอม</div>
+            <div class="select">
+              <select name="year" id="year">
+                <option value="">ปีการศึกษา</option>
+                <% if (userData.length != 0) {
+                  userData.forEach(function(data) {
+                %>
+                  <option value="<%= data.year; %>"><%= data.year; %></option>
+                <% }) %>
+                <% } else { %>
+                  <option value="">Data not found!!!</option>
+                <% } %>
+              </select>
+            </div>
+            <div class="select">
+              <select name="semeter" id="semeter">
+                <option value="">เทอม</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </div>
+            <input type="submit" value="Apply">
+          </form>
+      </div>
     </div>
   </section>
 <%- include('layouts/footer'); %>

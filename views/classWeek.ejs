@@ -1,82 +1,96 @@
 <%- include('layouts/header'); %>
-  <section class="section">
-    <div class="container">
-      <div class="title is-1">ชั้นเรียนสัปดาห์ <%= week %></div>
-      <div class="image is-3by2">
-        <iframe class="has-ratio" width="480" height="320" src="https://www.youtube.com/embed/vVNC43qdfzY" frameborder="0" allowfullscreen></iframe>
+  <section class="section hero is-warning">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns">
+          <div class="title is-1">ชั้นเรียนสัปดาห์ <%= week %></div>
+        </div>
+        <div class="columns">
+          <div class="image column is-3by2">
+            <iframe class="has-ratio" width="480" height="320" src="https://www.youtube.com/embed/vVNC43qdfzY" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="table-container column is-one-third">
+            <table class="table is-bordered is-fullwidth">
+              <thead>
+                <tr>
+                  <th>ชื่อวิดีโอ</th>
+                  <th>ลิ้งค์</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Async JS Part 1</td>
+                  <td><a href="">ลิ้งค์</a></td>
+                </tr>
+                <tr>
+                  <td>Async JS Part 2</td>
+                  <td><a href="https://www.youtube.com/embed/vVNC43qdfzY">ลิ้งค์</a></td>
+                </tr>
+                <tr>
+                  <td>Async JS Part 3</td>
+                  <td><a href="">ลิ้งค์</a></td>
+                </tr>
+                <tr>
+                  <td>Async JS Part 4</td>
+                  <td><a href="">ลิ้งค์</a></td>
+                </tr>
+                <tr>
+                  <td>Async JS Part 5</td>
+                  <td><a href="">ลิ้งค์</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-container column is-one-third">
+            <table class="table is-bordered is-fullwidth">
+              <thead>
+                <tr>
+                  <th>เอกสารประกอบการสอน</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Async JS Part 1</td>
+                </tr>
+                <tr>
+                  <td>Async JS Part 2</td>
+                </tr>
+                <tr>
+                  <td>Async JS Part 3</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-container column is-one-third">
+            <table class="table is-bordered is-fullwidth">
+              <thead>
+                <tr>
+                  <th>ไฟล์โปรแกรมตัวอย่าง</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Async JS Part 1</td>
+                </tr>
+                <tr>
+                  <td>Async JS Part 2</td>
+                </tr>
+                <tr>
+                  <td>Async JS Part 3</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="title is-3">คำอธิบาย</div>
+        </div>
+        <div class="columns">
+          <div class="message column">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas, beatae? Autem optio nisi architecto facilis nobis, distinctio dolore natus fuga.</div>
+        </div>
       </div>
-      <div class="table-container mt-5">
-        <table class="table is-bordered">
-          <thead>
-            <tr>
-              <th>ชื่อวิดีโอ</th>
-              <th>ลิ้งค์</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Async JS Part 1</td>
-              <td><a href="">ลิ้งค์</a></td>
-            </tr>
-            <tr>
-              <td>Async JS Part 2</td>
-              <td><a href="https://www.youtube.com/embed/vVNC43qdfzY">ลิ้งค์</a></td>
-            </tr>
-            <tr>
-              <td>Async JS Part 3</td>
-              <td><a href="">ลิ้งค์</a></td>
-            </tr>
-            <tr>
-              <td>Async JS Part 4</td>
-              <td><a href="">ลิ้งค์</a></td>
-            </tr>
-            <tr>
-              <td>Async JS Part 5</td>
-              <td><a href="">ลิ้งค์</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="table-container mt-5">
-        <table class="table is-bordered">
-          <thead>
-            <tr>
-              <th>เอกสารประกอบการสอน</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Async JS Part 1</td>
-            </tr>
-            <tr>
-              <td>Async JS Part 2</td>
-            </tr>
-            <tr>
-              <td>Async JS Part 3</td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="table is-bordered">
-          <thead>
-            <tr>
-              <th>ไฟล์โปรแกรมตัวอย่าง</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Async JS Part 1</td>
-            </tr>
-            <tr>
-              <td>Async JS Part 2</td>
-            </tr>
-            <tr>
-              <td>Async JS Part 3</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="title is-3">คำอธิบาย</div>
-      <div class="message mb-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas, beatae? Autem optio nisi architecto facilis nobis, distinctio dolore natus fuga.</div>
     </div>
   </section>
 <%- include('layouts/footer'); %>

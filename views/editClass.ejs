@@ -1,50 +1,54 @@
 <%- include('layouts/header'); %>
       <% if (isAdmin) { %>
-        <section class="section">
-          <div class="container">
-            <div class="title is-1">แก้ไขชั้นเรียนสัปดาห์ <%= week %></div>
-            <form action="" method="POST">
-              <div class="title is-3">เพิ่มลิงค์วิดีโอ ที่นี่</div>
-              <div class="table-container">
-                <table class="table is-bordered" id="VideoTable1">
-                    <thead>
-                        <tr>
-                            <th>เพิ่มแถว</th>
-                            <th>เพิ่มชื่อวิดีโอ</th>
-                            <th>เพิ่มลิงค์วิดีโอ</th>
-                            <th>ลบแถว</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><button type="button" onclick="addRows()">+</button></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+        <section class="section hero is-success">
+          <div class="hero-body">
+            <div class="container">
+              <div class="columns">
+                <div class="title is-1">แก้ไขชั้นเรียนสัปดาห์ <%= week %></div>
               </div>
-              <div class="title is-3">เพิ่มเอกสารประกอบการสอน ที่นี่</div>
-              <div id="" class="file">
-                <label class="file-label">
-                  เลือกไฟล์ที่จะอัพโหลด :
-                </label>
-                <input type="file" name="class1" multiple>
-              </div>
-              <div class="title is-3 mt-5">เพิ่มไฟล์ชั้นเรียนตัวอย่าง ที่นี่</div>
-              <div id="" class="file">
-                <label class="file-label">
-                  เลือกไฟล์ที่จะอัพโหลด :
-                </label>
-                <input type="file" name="proj1" multiple>
-              </div>
-              <div class="title is-3 mt-5">เขียนคำอธิบาย</div>
-              <div class="control">
-                <textarea name="" id="" class="textarea"></textarea>
-              </div>
-              <div align="center"><button type="submit" class="button is-primary mt-5 mb-5">บันทึก</button> <a href="/home" class="button is-danger mt-5 mb-5">ยกเลิก</a></div>
-            </form>
+              <form action="" method="POST">
+                <div class="title is-3">เพิ่มลิงค์วิดีโอ ที่นี่</div>
+                <div class="table-container">
+                  <table class="table is-bordered" id="VideoTable1">
+                      <thead>
+                          <tr>
+                              <th>เพิ่มแถว</th>
+                              <th>เพิ่มชื่อวิดีโอ</th>
+                              <th>เพิ่มลิงค์วิดีโอ</th>
+                              <th>ลบแถว</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td><button type="button" onclick="addRows()">+</button></td>
+                              <td><input type="text"></td>
+                              <td><input type="text"></td>
+                              <td></td>
+                          </tr>
+                      </tbody>
+                  </table>
+                </div>
+                <div class="title is-3">เพิ่มเอกสารประกอบการสอน ที่นี่</div>
+                <div id="" class="file">
+                  <label class="file-label">
+                    เลือกไฟล์ที่จะอัพโหลด :
+                  </label>
+                  <input type="file" name="class1" multiple>
+                </div>
+                <div class="title is-3 mt-5">เพิ่มไฟล์ชั้นเรียนตัวอย่าง ที่นี่</div>
+                <div id="" class="file">
+                  <label class="file-label">
+                    เลือกไฟล์ที่จะอัพโหลด :
+                  </label>
+                  <input type="file" name="proj1" multiple>
+                </div>
+                <div class="title is-3 mt-5">เขียนคำอธิบาย</div>
+                <div class="control">
+                  <textarea name="" id="" class="textarea"></textarea>
+                </div>
+                <div align="center"><button type="submit" class="button is-link mt-5 mb-5">บันทึก</button> <a href="/home" class="button is-danger mt-5 mb-5">ยกเลิก</a></div>
+              </form>
+            </div>
           </div>
         </section>
       <% } %>
