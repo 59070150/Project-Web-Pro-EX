@@ -1,5 +1,5 @@
 <%- include('layouts/header'); %>
-  <section class="section hero is-warning">
+  <section class="hero is-warning">
     <div class="hero-body">
       <div class="container">
         <div class="columns">
@@ -9,15 +9,26 @@
           <div class="title is-3">คำอธิบาย</div>
         </div>
         <div class="columns">
-          <div class="message column">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas, beatae? Autem optio nisi architecto facilis nobis, distinctio dolore natus fuga.</div>
+          <div class="message column"><%= desc %></div>
         </div>
-        <figure class="image is-128x128">
-          <img src="/128x128.png">
-        </figure>
+        <div class="columns">
+          <% if (imgData.length != 0) {
+            imgData.forEach(function(data) {
+          %>
+          <figure class="image column is-3by2">
+            <img src="/<%= data.image_title %>">
+          </figure>
+          <% }) %>
+          <% } else { %>
+            <figure class="image column is-128x128">
+              <img src="/128x128.png">
+            </figure>
+          <% } %>
+        </div>
         <div class="columns">
           <div class="link column mt-5">
-            <a href="">ลิ้งค์ Github แบบฝึกหัด</a><br>
-            <a href="">ลิ้งค์ Github เฉลยแบบฝึกหัด</a>
+            <a href="<%= exlink %>">ลิ้งค์ Github แบบฝึกหัด</a><br>
+            <a href="<%= anslink %>">ลิ้งค์ Github เฉลยแบบฝึกหัด</a>
           </div>
         </div>
         <div class="columns">
@@ -31,31 +42,20 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>หัวข้อที่ 1</td>
-                  <td>...</td>
-                  <td>100</td>
-                </tr>
-                <tr>
-                  <td>หัวข้อที่ 2</td>
-                  <td>...</td>
-                  <td>100</td>
-                </tr>
-                <tr>
-                  <td>หัวข้อที่ 3</td>
-                  <td>...</td>
-                  <td>100</td>
-                </tr>
-                <tr>
-                  <td>หัวข้อที่ 4</td>
-                  <td>...</td>
-                  <td>100</td>
-                </tr>
-                <tr>
-                  <td>หัวข้อที่ 5</td>
-                  <td>...</td>
-                  <td>100</td>
-                </tr>
+                <% if (quesData.length != 0) {
+                  quesData.forEach(function(data) {
+                %>
+                  <tr>
+                    <td><%= data.question_title %></td>
+                    <td><%= data.question_description %></td>
+                    <td><%= data.question_score %></td>
+                  </tr>
+                <% }) %>
+                <% } else { %>
+                    <tr>
+                      <td colspan="7">No Data Found</td>
+                    </tr>
+                <% } %>
               </tbody>
             </table>
           </div>

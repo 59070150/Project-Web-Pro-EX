@@ -4,9 +4,20 @@
           <div class="hero-body">
             <div class="container">
               <div class="columns">
-                <div class="title is-1">แก้ไขชั้นเรียนสัปดาห์ <%= week %></div>
+                <div class="title is-1">เพิ่มชั้นเรียน</div>
               </div>
-              <form action="/editClass/<%= week %>" enctype="multipart/form-data" method="POST">
+              <form action="/addClass" enctype="multipart/form-data" method="POST">
+                <div class="title is-3">เลือกสัปดาห์ที่จะเพิ่ม</div>
+                <div class="select">
+                    <select name="week">
+                      <option value="">สัปดาห์</option>
+                      <% for (let i = 1; i <= 15; i++) { %>
+                        <option value="<%= i; %>">สัปดาห์ <%= i; %></option>
+                      <% } %>
+                    </select>
+                </div>
+                <div class="title is-3">เพิ่มชื่อชั้นเรียน</div>
+                <input class="input" type="text" placeholder="เขียนชื่อชั้นเรียน" name="classTitle" id="classTitle">
                 <div class="title is-3">เพิ่มลิงค์วิดีโอ ที่นี่</div>
                 <div class="table-container">
                   <table class="table is-bordered" id="VideoTable1">
@@ -44,7 +55,7 @@
                 </div>
                 <div class="title is-3 mt-5">เขียนคำอธิบาย</div>
                 <div class="control">
-                  <textarea name="classDesc" id="" class="textarea"><%= desc %></textarea>
+                  <textarea name="classDesc" id="" class="textarea"></textarea>
                 </div>
                 <div align="center"><button type="submit" class="button is-link mt-5 mb-5">บันทึก</button> <a href="/home" class="button is-danger mt-5 mb-5">ยกเลิก</a></div>
               </form>

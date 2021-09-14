@@ -1,6 +1,6 @@
 <%- include('layouts/header'); %>
   <% if (isAdmin) { %>
-    <section class="section hero is-success">
+    <section class="hero is-success">
       <div class="hero-body">
         <div class="container">
           <div class="columns">
@@ -8,26 +8,27 @@
           </div>
           <form action="/studentlist" method="POST">
             <div class="select">
-              <select name="year">
-                <% var year = 2554; %>
+              <select name="year1">
+                <% var date = new Date(); %>
+                <% var year = date.getFullYear() + 543; %>
                   <% for (let i = 0; i <= 10; i++) { %>
-                    <option value="<% year; %>"><%= year; %></option>
+                    <option value="<%= year; %>"><%= year; %></option>
                     <% year++; %>
                   <% } %>
               </select>
             </div>
             <div class="select">
-              <select name="" id="">
+              <select name="semeter" id="semeter">
                 <option value="">เทอม</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
               </select>
             </div>
             <div class="select">
-              <select name="" id="">
+              <select name="sec" id="sec">
                 <option value="">เซค</option>
-                <option value="morning">เช้า</option>
-                <option value="early">บ่าย</option>
+                <option value="1">เช้า</option>
+                <option value="2">บ่าย</option>
               </select>
             </div>
             <input type="submit" value="View">
@@ -84,33 +85,34 @@
           <div class="columns">
             <div class="title is-3">อัพโหลดรายชื่อนักศึกษา</div>
           </div>
-            <form action="" method="POST">
+            <form action="/uploadStudent" enctype="multipart/form-data" method="POST">
               <div class="select">
-                <select name="" id="">
+                <select name="year2">
                   <option value="">ปีการศึกษา</option>
-                  <% var year = 2554; %>
+                  <% var date = new Date(); %>
+                  <% var yearDate = date.getFullYear() + 543; %>
                   <% for (let i = 0; i <= 10; i++) { %>
-                    <option value="<% year; %>"><%= year; %></option>
-                    <% year++; %>
+                    <option value="<%= yearDate; %>"><%= yearDate; %></option>
+                    <% yearDate++; %>
                   <% } %>
                 </select>
               </div>
               <div class="select">
-                <select name="" id="">
+                <select name="semeter">
                   <option value="">เทอม</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                 </select>
               </div>
               <div class="select">
-                <select name="" id="">
+                <select name="sec">
                   <option value="">Section</option>
-                  <option value="">เช้า</option>
-                  <option value="">บ่าย</option>
+                  <option value="1">เช้า</option>
+                  <option value="2">บ่าย</option>
                 </select>
               </div>
               <div class="file">
-                <input type="file" name="" id="">
+                <input type="file" name="studentList" id="studentList">
               </div>
               <input type="submit" value="Upload">
             </form>

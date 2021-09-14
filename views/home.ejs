@@ -77,7 +77,7 @@
       </div>
     </section>
   <% } else { %>
-    <section class="section hero is-success">
+    <section class="hero is-success">
       <div class="hero-body">
         <div class="container">
           <div class="columns">
@@ -128,15 +128,26 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% for (let i = 1; i <= 15; i++) { %>
-                    <tr>
-                      <td><a href="/classWeek/<%= i; %>">ชั้นเรียนสัปดาห์ <%= i; %></a></td>
-                      <td align="center"><a href="/editClass/<%= i; %>">แก้ไข</a></td>
-                    </tr>
-                  <% } %>
+                  <% if (classData.length != 0) {
+                      var i = 1;
+                      classData.forEach(function(data) {
+                  %>
+                      <tr>
+                        <td><a href="/classWeek/<%= data.class_id %>"><%= data.class_title %></a></td>
+                        <td align="center"><a href="/editClass/<%= data.class_id %>">แก้ไข</a></td>
+                      </tr>
+                    <% i++ }) %>
+                    <% } else { %>
+                        <tr>
+                          <td colspan="7">No Data Found</td>
+                        </tr>
+                    <% } %>
                 </tbody>
               </table>
             </div>
+          </div>
+          <div class="columns">
+            <div class="column" align="center"><a href="/addClass" class="button is-link">เพิ่มชั้นเรียน</a></div>
           </div>
           <div class="columns">
             <div class="title is-2 mt-5">จัดการแบบฝึกหัด</div>
@@ -151,15 +162,26 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% for (let i = 1; i <= 15; i++) { %>
-                    <tr>
-                      <td><a href="/exWeek/<%= i; %>">แบบฝึกหัดสัปดาห์ <%= i; %></a></td>
-                      <td align="center"><a href="/editEx/<%= i; %>">แก้ไข</a></td>
-                    </tr>
-                  <% } %>
+                  <% if (exData.length != 0) {
+                      var i = 1;
+                      exData.forEach(function(data) {
+                  %>
+                      <tr>
+                        <td><a href="/exWeek/<%= data.exercise_id %>"><%= data.exercise_title %></a></td>
+                        <td align="center"><a href="/editEx/<%= data.exercise_id %>">แก้ไข</a></td>
+                      </tr>
+                    <% i++ }) %>
+                    <% } else { %>
+                        <tr>
+                          <td colspan="7">No Data Found</td>
+                        </tr>
+                    <% } %>
                 </tbody>
               </table>
             </div>
+          </div>
+          <div class="columns">
+            <div class="column" align="center"><a href="/addExercise" class="button is-link">เพิ่มแบบฝึกหัด</a></div>
           </div>
         </div>
       </div>

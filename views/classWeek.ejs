@@ -7,7 +7,7 @@
         </div>
         <div class="columns">
           <div class="image column is-3by2">
-            <iframe class="has-ratio" width="480" height="320" src="https://www.youtube.com/embed/vVNC43qdfzY" frameborder="0" allowfullscreen></iframe>
+            <iframe id="classVideo" class="has-ratio" width="480" height="320" src="" frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
         <div class="columns">
@@ -20,26 +20,19 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Async JS Part 1</td>
-                  <td><a href="">ลิ้งค์</a></td>
-                </tr>
-                <tr>
-                  <td>Async JS Part 2</td>
-                  <td><a href="https://www.youtube.com/embed/vVNC43qdfzY">ลิ้งค์</a></td>
-                </tr>
-                <tr>
-                  <td>Async JS Part 3</td>
-                  <td><a href="">ลิ้งค์</a></td>
-                </tr>
-                <tr>
-                  <td>Async JS Part 4</td>
-                  <td><a href="">ลิ้งค์</a></td>
-                </tr>
-                <tr>
-                  <td>Async JS Part 5</td>
-                  <td><a href="">ลิ้งค์</a></td>
-                </tr>
+                <% if (vidData.length != 0) {
+                  vidData.forEach(function(data) {
+                %>
+                  <tr>
+                    <td><%= data.video_title %></td>
+                    <td><button onclick="changeVideo(`<%= data.video_URL %>`)">ลิ้งค์</button></td>
+                  </tr>
+                <% }) %>
+                <% } else { %>
+                    <tr>
+                      <td colspan="7">No Data Found</td>
+                    </tr>
+                <% } %>
               </tbody>
             </table>
           </div>
@@ -51,15 +44,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Async JS Part 1</td>
-                </tr>
-                <tr>
-                  <td>Async JS Part 2</td>
-                </tr>
-                <tr>
-                  <td>Async JS Part 3</td>
-                </tr>
+                <% if (fileData.length != 0) {
+                  fileData.forEach(function(data) {
+                %>
+                  <tr>
+                    <td><a href="/download/<%= data.file_src %>"><%= data.file_title %></a></td>
+                  </tr>
+                <% }) %>
+                <% } else { %>
+                    <tr>
+                      <td colspan="7">No Data Found</td>
+                    </tr>
+                <% } %>
               </tbody>
             </table>
           </div>
@@ -71,15 +67,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Async JS Part 1</td>
-                </tr>
-                <tr>
-                  <td>Async JS Part 2</td>
-                </tr>
-                <tr>
-                  <td>Async JS Part 3</td>
-                </tr>
+                <% if (projData.length != 0) {
+                  projData.forEach(function(data) {
+                %>
+                  <tr>
+                    <td><a href="/download/<%= data.project_src %>"><%= data.project_title %></a></td>
+                  </tr>
+                <% }) %>
+                <% } else { %>
+                    <tr>
+                      <td colspan="7">No Data Found</td>
+                    </tr>
+                <% } %>
               </tbody>
             </table>
           </div>
@@ -88,9 +87,15 @@
           <div class="title is-3">คำอธิบาย</div>
         </div>
         <div class="columns">
-          <div class="message column">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas, beatae? Autem optio nisi architecto facilis nobis, distinctio dolore natus fuga.</div>
+          <div class="message column"><%= desc %></div>
         </div>
       </div>
     </div>
   </section>
+
+  <script text="javascript">
+    function changeVideo(url) {
+      document.getElementById('classVideo').setAttribute('src', url);
+    }
+  </script>
 <%- include('layouts/footer'); %>
