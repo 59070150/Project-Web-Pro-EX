@@ -1,8 +1,37 @@
 const express = require("express");
 const { parse } = require("uuid");
 const connection = require("../config");
+const multer = require("multer");
+const path = require("path");
+const csv = require("fast-csv");
+const fs = require("fs");
+
+const readXcelFile = require("read-excel-file/node");
 
 router = express.Router();
+
+const storage = multer.diskStorage({
+	destination: function(req, file, callback) {
+	  callback(null, './routes/students');
+	},
+	filename: function(req, file, callback) {
+	  callback(null, file.originalname);
+	}
+});
+
+const fileFilter = (req, file, callback) => {
+	if (
+		file.mimetype.includes("excel") ||
+		file.mimetype.includes("spreadsheetml") ||
+		file.mimetype.includes("csv")
+	) {
+	  callback(null, true);
+	} else {
+	  callback(null, false); // else fails
+	}
+};
+
+const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 router.get('/', (req, res) => {
     res.render('login')
@@ -18,8 +47,7 @@ router.get('/logout', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-	let username = req.body.username;
-	let password = req.body.password;
+	const { username, password } = req.body;
 	if (username && password) {
 		connection.query('SELECT * FROM admin WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
 			if (results.length > 0) {
@@ -47,10 +75,7 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-	let username = req.body.username;
-	let password = req.body.password;
-	let firstname = req.body.firstname;
-	let lastname = req.body.lastname;
+	const { username, password, firstname, lastname } = req.body;
 	let isAdmin = true;
 	connection.query('SELECT * FROM admin WHERE username = ? OR password = ?', [username, password], function(error, results, fields) {
 		if (results.length > 0) {
@@ -98,13 +123,9 @@ router.get('/editAdmin/:id', (req, res) => {
 })
 
 router.post('/editAdmin', (req, res) => {
-	let uname = req.body.username;
-	let pass = req.body.password;
-	let fname = req.body.firstname;
-	let lname = req.body.lastname;
-	let isadmin = req.body.isadmin;
+	const { username, password, firstname, lastname, isadmin } = req.body;
 	if (isadmin) {
-		connection.query('UPDATE admin SET username = ?, password = ?, firstname = ?, lastname = ?, is_admin = ? WHERE user_id = ?', [uname, pass, fname, lname, isadmin, req.session.uid], function(error, results, fields) {
+		connection.query('UPDATE admin SET username = ?, password = ?, firstname = ?, lastname = ?, is_admin = ? WHERE user_id = ?', [username, password, firstname, lastname, isadmin, req.session.uid], function(error, results, fields) {
 			res.redirect('/admin');
 		})
 	} else {
@@ -138,6 +159,41 @@ router.post('/studentlist', (req, res, next) => {
 		if (error) throw error;
 		res.render('studentlist', {userData: results});
 	});
+})
+
+router.post('/uploadStudent', upload.single('studentList'), (req, res) => {
+	let year = req.body.year2;
+	let semeter = req.body.semeter;
+	let section = req.body.sec;
+	let student = req.file;
+	if (!year || !semeter || !section) {
+		res.send('Please select all data before upload');
+	} else if (!student) {
+		res.send('Please upload student list data');
+	} else {
+		let students = [];
+		let filepath = __dirname + '/students/' + student.filename;
+		fs.createReadStream(filepath)
+			.pipe(csv.parse({ headers: false }))
+      		.on("error", (error) => {
+        		throw error;
+      		})
+      		.on("data", (data) => {
+        		students.push(data);
+      		})
+      		.on("end", () => {
+				students.shift();
+				console.log(students);
+				// connection.query('INSERT INTO student (`student_id`, `firstname`, `lastname`, `email`) VALUES ?', [students], function(error, results, fields) {
+				// 	if (error) throw error;
+				// });
+      		});
+		// connection.query('SELECT * FROM student', function(error, results, fields) {
+		// 	if (error) throw error;
+		// 	console.log(results);
+		// })
+		res.redirect('/studentlist');
+	}
 })
 
 exports.router = router;
