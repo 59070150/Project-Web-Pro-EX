@@ -8,25 +8,89 @@
               </div>
               <form action="/editClass/<%= week %>" enctype="multipart/form-data" method="POST">
                 <div class="title is-3">เพิ่มลิงค์วิดีโอ ที่นี่</div>
-                <div class="table-container">
-                  <table class="table is-bordered" id="VideoTable1">
-                      <thead>
-                          <tr>
+                <div class="columns">
+                  <div class="table-container column is-one-third">
+                    <table class="table is-bordered" id="VideoTable1">
+                        <thead>
+                            <tr>
                               <th>เพิ่มแถว</th>
                               <th>เพิ่มชื่อวิดีโอ</th>
                               <th>เพิ่มลิงค์วิดีโอ</th>
                               <th>ลบแถว</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr>
-                            <td><button type="button" onclick="addRows()">+</button></td>
-                            <td><input type="text" name="videoName[]"></td>
-                            <td><input type="text" name="videoUrl[]"></td>
-                            <td></td>
-                          </tr>
-                      </tbody>
-                  </table>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <% if (vidData.length != 0) {
+                            vidData.forEach(function(data) {
+                          %>
+                            <tr>
+                              <td><button type="button" onclick="addRows()">+</button></td>
+                              <td><textarea name="videoName[]" id="" cols="30" rows="3"><%= data.video_title %></textarea></td>
+                              <td><textarea name="videoUrl[]" id="" cols="30" rows="3"><%= data.video_URL %></textarea></td>
+                              <td><button type='button' onclick='deleteRows(this)'>Delete</button></td>
+                            </tr>
+                          <% }) %>
+                          <% } else { %>
+                            <tr>
+                              <td><button type="button" onclick="addRows()">+</button></td>
+                              <td><textarea name="videoName[]" id="" cols="30" rows="3"></textarea></td>
+                              <td><textarea name="videoUrl[]" id="" cols="30" rows="3"></textarea></td>
+                              <td></td>
+                            </tr>
+                          <% } %>
+                        </tbody>
+                    </table>
+                  </div>
+                  <div class="table-container column is-one-third">
+                    <table class="table is-bordered">
+                        <thead>
+                            <tr>
+                              <th>ชื่อไฟล์</th>
+                              <th>ลบไฟล์</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <% if (fileData.length != 0) {
+                            fileData.forEach(function(data) {
+                          %>
+                            <tr>
+                              <td><textarea name="fileName[]" id="" cols="30" rows="3"><%= data.file_title %></textarea></td>
+                              <td><a href="/delFile1/<%= data.file_src %>">Delete</a></td>
+                            </tr>
+                          <% }) %>
+                          <% } else { %>
+                            <tr>
+                              <td colspan="7">No Data Found</td>
+                            </tr>
+                          <% } %>
+                        </tbody>
+                    </table>
+                  </div>
+                  <div class="table-container column is-one-third">
+                    <table class="table is-bordered">
+                        <thead>
+                            <tr>
+                              <th>ชื่อไฟล์</th>
+                              <th>ลบไฟล์</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <% if (projData.length != 0) {
+                            projData.forEach(function(data) {
+                          %>
+                            <tr>
+                              <td><textarea name="projName[]" id="" cols="30" rows="3"><%= data.project_title %></textarea></td>
+                              <td><a href="/delFile2/<%= data.project_src %>">Delete</a></td>
+                            </tr>
+                          <% }) %>
+                          <% } else { %>
+                            <tr>
+                              <td colspan="7">No Data Found</td>
+                            </tr>
+                          <% } %>
+                        </tbody>
+                    </table>
+                  </div>
                 </div>
                 <div class="title is-3">เพิ่มเอกสารประกอบการสอน ที่นี่ (หมายเหตุ : ชื่อไฟล์ต้องไม่มีเว้นวรรค และ เครื่องหมายพิเศษ)</div>
                 <div id="" class="file">
@@ -62,8 +126,8 @@
             let cell1 = row.insertCell(1);
             let cell2 = row.insertCell(2);
             let cell3 = row.insertCell(3);
-            cell1.innerHTML = "<input type='text' name='videoName[]'>";
-            cell2.innerHTML = "<input type='text' name='videoUrl[]'>";
+            cell1.innerHTML = "<textarea name='videoName[]' cols='30' rows='3'></textarea>";
+            cell2.innerHTML = "<textarea name='videoUrl[]' cols='30' rows='3'></textarea>";
             cell3.innerHTML = "<button type='button' onclick='deleteRows(this)'>Delete</button>";
           }
 

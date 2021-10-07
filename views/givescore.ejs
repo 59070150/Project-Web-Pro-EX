@@ -1,25 +1,36 @@
 <%- include('layouts/header'); %>
-  <% if (isAdmin) { %>
-      <section class="section hero is-success">
+  <% if (isAdmin || !isAdmin) { %>
+      <section class="hero is-success">
         <div class="hero-body">
           <div class="container">
             <div class="columns">
               <div class="title is-1">Give Score</div>
             </div>
-            <form action="" method="post">
+            <form action="/givescore" method="POST">
                 <div class="select">
-                    <select name="" id="">
-                      <option value="">Week</option>
-                      <% for (let i = 1; i <= 15; i++) { %>
-                        <option value="<% i; %>">Week <%= i; %></option>
+                    <select name="week">
+                      <option value="">สัปดาห์</option>
+                      <% if (weekData.length != 0) {
+                        weekData.forEach(function(data) {
+                      %>
+                        <option value="<%= data.week_id %>">สัปดาห์ที่ <%= data.week %></option>
+                      <% }) %>
+                      <% } else { %>
+                        <option value="">Not found</option>
                       <% } %>
                     </select>
                 </div>
                 <div class="select">
-                    <select name="" id="">
+                    <select name="section">
                       <option value="">Section</option>
-                      <option value="">เช้า</option>
-                      <option value="">บ่าย</option>
+                      <% if (sectionData.length != 0) {
+                        sectionData.forEach(function(data) {
+                      %>
+                        <option value="<%= data.section_id %>"><%= data.section_title %></option>
+                      <% }) %>
+                      <% } else { %>
+                        <option value="">Not found</option>
+                      <% } %>
                     </select>
                 </div>
                 <input type="submit" value="Choose">
@@ -35,36 +46,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>59070150</td>
-                        <td>4/5</td>
-                        <td><a href="/givepage">ให้คะแนน</a></td>
-                      </tr>
-                      <tr>
-                        <td>59070151</td>
-                        <td>3/5</td>
-                        <td><a href="/givepage">ให้คะแนน</a></td>
-                      </tr>
-                      <tr>
-                        <td>59070152</td>
-                        <td>5/5</td>
-                        <td><a href="/givepage">ให้คะแนน</a></td>
-                      </tr>
-                        <!-- <% if (userData.length != 0) {
-                            var i = 1;
-                            userData.forEach(function(data) {
+                        <% if (userData.length != 0) {
+                            var i = 0;
+                            if (scoreData.length != 0) {
+                              userData.forEach(function(data) {
+                                scoreData.forEach(data2 => {
+                                  if (data2.student_id == data.student_id) {
+                                    i++;
+                                  }
+                                })
                         %>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><%= data.student_id %></td>
+                                <td><%= i %>/<%= questionData.length %></td>
+                                <td><a href="/givepage/<%= data.student_id %>/<%= questionData[0].exercise_id %>">ให้คะแนน</a></td>
                             </tr>
-                        <% i++; }) %>
+                        <% }) } else { userData.forEach(data => { %>
+                            <tr>
+                                <td><%= data.student_id %></td>
+                                <td><%= scoreData.length %>/<%= questionData.length %></td>
+                                <td><a href="/givepage/<%= data.student_id %>/<%= questionData[0].exercise_id %>">ให้คะแนน</a></td>
+                            </tr>
+                        <% }); %>
+                        <% } %>
                         <% } else { %>
                             <tr>
                                 <td colspan="7">No Data Found</td>
                             </tr>
-                        <% } %> -->
+                        <% } %>
                     </tbody>
                 </table>
               </div>

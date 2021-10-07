@@ -9,6 +9,7 @@
           <form action="/studentlist" method="POST">
             <div class="select">
               <select name="year1">
+                <option value="">ปีการศึกษา</option>
                 <% var date = new Date(); %>
                 <% var year = date.getFullYear() + 543; %>
                   <% for (let i = 0; i <= 10; i++) { %>
@@ -22,13 +23,20 @@
                 <option value="">เทอม</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
+                <option value="3">3</option>
               </select>
             </div>
             <div class="select">
               <select name="sec" id="sec">
                 <option value="">เซค</option>
-                <option value="1">เช้า</option>
-                <option value="2">บ่าย</option>
+                <% if (sectionData.length != 0) {
+                  sectionData.forEach(function(data) {
+                %>
+                  <option value="<%= data.section_id %>"><%= data.section_title %></option>
+                <% }) %>
+                <% } else { %>
+                  <option value="">Not Data Found</option>
+                <% } %>
               </select>
             </div>
             <input type="submit" value="View">
@@ -46,44 +54,27 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>59070150</td>
-                      <td>วชิรวิทย์</td>
-                      <td>วรารักษ์</td>
-                      <td>59070150@it.kmitl.ac.th</td>
-                    </tr>
-                    <tr>
-                      <td>59070151</td>
-                      <td>วชิระ</td>
-                      <td>ดวงจิตร</td>
-                      <td>59070151@it.kmitl.ac.th</td>
-                    </tr>
-                    <tr>
-                      <td>59070152</td>
-                      <td>วรพงษ์</td>
-                      <td>วิเศษมาตย์</td>
-                      <td>59070152@it.kmitl.ac.th</td>
-                    </tr>
-                      <!-- <% if (userData.length != 0) {
-                          var i = 1;
+                      <% if (userData.length != 0) {
                           userData.forEach(function(data) {
                       %>
                           <tr>
-                              <td><%= i; %></td>
-                              <td><%= data.username %></td>
-                              <td><%= data.userlevel %></td>
+                            <td><%= data.student_id %></td>
+                            <td><%= data.firstname %></td>
+                            <td><%= data.lastname %></td>
+                            <td><%= data.email %></td>
                           </tr>
-                      <% i++; }) %>
+                      <% }) %>
                       <% } else { %>
                           <tr>
-                              <td colspan="7">No Data Found</td>
+                            <td colspan="7">No Data Found</td>
                           </tr>
-                      <% } %> -->
+                      <% } %>
                   </tbody>
               </table>
             </div>
           </div>
           <div class="columns">
-            <div class="title is-3">อัพโหลดรายชื่อนักศึกษา</div>
+            <div class="title is-3">อัพโหลดรายชื่อนักศึกษา (หมายเหตุ : ไฟล์ต้องบันทึกเป็น csv UTF-8 เท่านั้น)</div>
           </div>
             <form action="/uploadStudent" enctype="multipart/form-data" method="POST">
               <div class="select">
@@ -102,13 +93,20 @@
                   <option value="">เทอม</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
+                  <option value="3">3</option>
                 </select>
               </div>
               <div class="select">
                 <select name="sec">
                   <option value="">Section</option>
-                  <option value="1">เช้า</option>
-                  <option value="2">บ่าย</option>
+                  <% if (sectionData.length != 0) {
+                        sectionData.forEach(function(data) {
+                  %>
+                    <option value="<%= data.section_id %>"><%= data.section_title %></option>
+                  <% }) %>
+                  <% } else { %>
+                    <option value="">Not Data Found</option>
+                  <% } %>
                 </select>
               </div>
               <div class="file">

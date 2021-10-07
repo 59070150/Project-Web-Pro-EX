@@ -1,12 +1,12 @@
 <%- include('layouts/header'); %>
-    <% if (isAdmin) { %>
-      <section class="hero is-success">
+    <% if (isAdmin || !isAdmin) { %>
+      <section class="hero">
         <div class="hero-body">
           <div class="container">
             <div class="columns">
               <div class="title is-1">เพิ่มข่าว</div>
             </div>
-            <div class="message is-success">
+            <div class="message is-danger">
               <p> <%=(typeof alertMsg!='undefined')? alertMsg:''%> </p>
             </div>
             <form action="/addnews" method="post">
@@ -21,8 +21,13 @@
                 <div class="select">
                   <select name="week">
                     <option value="">สัปดาห์</option>
-                    <% for (let i = 1; i <= 15; i++) { %>
-                      <option value=<%= i; %>>สัปดาห์ <%= i; %></option>
+                    <% if (weekData.length != 0) {
+                      weekData.forEach(function(data) {
+                    %>
+                      <option value="<%= data.week_id %>">สัปดาห์ที่ <%= data.week %></option>
+                    <% }) %>
+                    <% } else { %>
+                      <option value="">Not found</option>
                     <% } %>
                   </select>
                 </div>

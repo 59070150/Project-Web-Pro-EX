@@ -1,65 +1,55 @@
 <%- include('layouts/header'); %>
-    <% if (isAdmin) { %>
-      <section class="section hero is-warning">
+    <% if (isAdmin || !isAdmin) { %>
+      <section class="hero is-warning">
         <div class="hero-body">
           <div class="container">
             <div class="columns">
               <div class="title is-1">ให้คะแนนต่อนักศึกษา</div>
             </div>
             <div class="columns">
-              <div class="title is-3">รหัสนักศึกษา : 5907015X</div>
+              <div class="title is-3">รหัสนักศึกษา : <%= studentId %></div>
             </div>
-            <form action="" method="post">
+            <form action="/givepage/<%= studentId %>/<%= weekData %>" method="post">
                 <div class="table-container mb-5">
                     <table class="table is-bordered">
                         <thead>
                             <tr>
                                 <th>แบบฝึกหัด</th>
                                 <th>ใส่คะแนน</th>
+                                <% if (isAdmin) { %>
+                                  <th>อาจารย์แสดงความคิดเห็น</th>
+                                <% } else { %>
+                                  <th>TA แสดงความคิดเห็น</th>
+                                <% } %>
                             </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>แบบฝึกหัด 1</td>
-                            <td><input type="text"></td>
-                          </tr>
-                          <tr>
-                            <td>แบบฝึกหัด 2</td>
-                            <td><input type="text"></td>
-                          </tr>
-                          <tr>
-                            <td>แบบฝึกหัด 3</td>
-                            <td><input type="text"></td>
-                          </tr>
-                            <!-- <% if (userData.length != 0) {
-                                var i = 1;
-                                userData.forEach(function(data) {
+                            <% if (questionData.length != 0) {
+                                var i = 0;
+                                questionData.forEach(function(data) {
                             %>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
+                                  <td><%= data.question_title %></td>
+                                  <td><input id="score<%= i; %>" name="score[]" type="text"> / <%= data.question_score %></td>
+                                  <% if (isAdmin) { %>
+                                    <td><textarea name="insComment[]" id="" cols="30" rows="3"></textarea></td>
+                                  <% } else { %>
+                                    <td><textarea name="taComment[]" id="" cols="30" rows="3"></textarea></td>
+                                  <% } %>
                                 </tr>
                             <% i++; }) %>
                             <% } else { %>
                                 <tr>
-                                    <td colspan="7">No Data Found</td>
+                                  <td colspan="7">No Data Found</td>
                                 </tr>
-                            <% } %> -->
+                            <% } %>
                         </tbody>
                     </table>
-                </div>
-                <div class="title is-3">เจ้าหน้าที่แสดงความคิดเห็นต่อนักศึกษา</div>
-                <div class="control">
-                  <textarea name="" id="" class="textarea mb-5"></textarea>
-                </div>
-                <div class="title is-3">อาจารย์แสดงความคิดเห็นต่อนักศึกษา</div>
-                <div class="control">
-                  <textarea name="" id="" class="textarea"></textarea>
                 </div>
                 <div align="center"><input class="button is-primary mt-5 mb-5" type="submit" value="บันทึก"> <a href="/givescore" class="button is-danger mt-5 mb-5">ยกเลิก</a></div>
             </form>
           </div>
         </div>
       </section>
-  <% } %>
+    <% } %>
 <%- include('layouts/footer'); %>

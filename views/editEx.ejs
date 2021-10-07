@@ -40,13 +40,26 @@
                       </tr>
                 </thead>
                 <tbody>
+                  <% if (quesData.length != 0) {
+                    quesData.forEach(function(data) {
+                  %>
                     <tr>
-                        <td><button type="button" onclick="addRows()">+</button></td>
-                        <td><input type="text" name="extitle[]"></td>
-                        <td><textarea name="exdesc[]" id="" cols="30" rows="3"></textarea></td>
-                        <td><input type="text" name="exscore[]"></td>
-                        <td></td>
+                      <td><button type="button" onclick="addRows()">+</button></td>
+                      <td><textarea name="extitle[]" id="" cols="30" rows="3"><%= data.question_title %></textarea></td>
+                      <td><textarea name="exdesc[]" id="" cols="30" rows="3"><%= data.question_description %></textarea></td>
+                      <td><textarea name="exscore[]" id="" cols="30" rows="3"><%= data.question_score %></textarea></td>
+                      <td><button type='button' onclick='deleteRows(this)'>Delete</button></td>
                     </tr>
+                  <% }) %>
+                  <% } else { %>
+                    <tr>
+                      <td><button type="button" onclick="addRows()">+</button></td>
+                      <td><textarea name="extitle[]" id="" cols="30" rows="3"></textarea></td>
+                      <td><textarea name="exdesc[]" id="" cols="30" rows="3"></textarea></td>
+                      <td><textarea name="exscore[]" id="" cols="30" rows="3"></textarea></td>
+                      <td></td>
+                    </tr>
+                  <% } %>
                 </tbody>
               </table>
             </div>
@@ -78,9 +91,9 @@
                 let cell2 = row.insertCell(2);
                 let cell3 = row.insertCell(3);
                 let cell4 = row.insertCell(4);
-                cell1.innerHTML = "<input type='text' name='extitle[]'>";
+                cell1.innerHTML = "<textarea name='extitle[]' cols='30' rows='3'></textarea>";
                 cell2.innerHTML = "<textarea name='exdesc[]' id='' cols='30' rows='3'></textarea>";
-                cell3.innerHTML = "<input type='text' name='exscore[]'>";
+                cell3.innerHTML = "<textarea name='exscore[]' cols='30' rows='3'></textarea>";
                 cell4.innerHTML = "<button type='button' onclick='deleteRows(this)'>Delete</button>"
             }
 
