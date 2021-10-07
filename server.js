@@ -15,8 +15,11 @@ app.use(session({
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/node_modules'));
 app.use(express.static(__dirname + '/img'));
+app.use(express.static(__dirname + '/uploads'));
+app.use(express.static(__dirname + '/routes'));
+app.use(express.static(__dirname + '/image'));
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function(req, res, next) {
 	res.locals.loggedin = req.session.loggedin;
