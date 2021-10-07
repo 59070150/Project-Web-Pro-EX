@@ -147,18 +147,46 @@ router.get('/delAdmin/:id', (req, res) => {
 
 router.get('/studentlist', (req, res) => {
 	if (req.session.loggedin == true) {
-		res.render('studentlist', {userData: []});
+		if (req.session.semeterId) {
+			connection.query('SELECT * FROM section WHERE semeter_id = ?', [req.session.semeterId], function(error, results3, fields) {
+				if (error) throw error;
+				if (results3.length > 0) {
+					res.render('studentlist', {userData: [], sectionData: results3});
+				} else {
+					res.send('ยังไม่มีข้อมูลในเทอมที่เหลือ');
+				}
+			});
+		} else {
+			res.redirect('/semeter');
+		}
 	} else {
 		res.send('Please login to view this page!');
 	}
 })
 
 router.post('/studentlist', (req, res, next) => {
-	let selectLevel = req.body.level;
-	connection.query('SELECT * FROM user WHERE userlevel = ?', [selectLevel], function(error, results, fields) {
-		if (error) throw error;
-		res.render('studentlist', {userData: results});
-	});
+	let year = req.body.year1;
+	let semeter = req.body.semeter;
+	let section = req.body.sec;
+	if (!year || !semeter || !section) {
+		res.send('Please select data before view!!!');
+	} else {
+		connection.query('SELECT * FROM student WHERE section_id = ? AND semeter_id = (SELECT semeter_id FROM semeter WHERE year = ? AND semeter = ?)', [section, year, semeter], function(error, results, fields) {
+			if (error) throw error;
+			if (req.session.semeterId) {
+				connection.query('SELECT * FROM section WHERE semeter_id = ?', [req.session.semeterId], function(error, results3, fields) {
+					if (error) throw error;
+					if (results3.length > 0) {
+						res.render('studentlist', {userData: results, sectionData: results3});
+					} else {
+						res.send('ยังไม่มีข้อมูลในเทอมที่เหลือ');
+					}
+				});
+			} else {
+				res.redirect('/semeter');
+			}
+		});
+	}
 })
 
 router.post('/uploadStudent', upload.single('studentList'), (req, res) => {
@@ -173,25 +201,26 @@ router.post('/uploadStudent', upload.single('studentList'), (req, res) => {
 	} else {
 		let students = [];
 		let filepath = __dirname + '/students/' + student.filename;
-		fs.createReadStream(filepath)
+		connection.query('SELECT semeter_id FROM semeter WHERE year = ? AND semeter = ?', [year, semeter], function(error, results, fields) {
+			if (error) throw error;
+			let Id = results[0].semeter_id;
+			// let semeterId = Id.toString();
+			fs.createReadStream(filepath)
 			.pipe(csv.parse({ headers: false }))
       		.on("error", (error) => {
         		throw error;
       		})
       		.on("data", (data) => {
+				data.push(section, Id);
         		students.push(data);
       		})
       		.on("end", () => {
 				students.shift();
-				console.log(students);
-				// connection.query('INSERT INTO student (`student_id`, `firstname`, `lastname`, `email`) VALUES ?', [students], function(error, results, fields) {
-				// 	if (error) throw error;
-				// });
+				connection.query('INSERT INTO student (`student_id`, `firstname`, `lastname`, `email`, `section_id`, `semeter_id`) VALUES ?', [students], function(error, results, fields) {
+					if (error) throw error;
+				});
       		});
-		// connection.query('SELECT * FROM student', function(error, results, fields) {
-		// 	if (error) throw error;
-		// 	console.log(results);
-		// })
+		});
 		res.redirect('/studentlist');
 	}
 })

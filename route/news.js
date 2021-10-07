@@ -5,7 +5,18 @@ router = express.Router();
 
 router.get('/addnews', (req, res) => {
 	if (req.session.loggedin == true) {
-		res.render('addnews');
+		if (req.session.semeterId) {
+			connection.query('SELECT * FROM week WHERE semeter_id = ?', [req.session.semeterId], function(error, results4, fields) {
+				if (error) throw error;
+				if (results4.length > 0) {
+					res.render('addnews', {weekData: results4});
+				} else {
+					res.send('ยังไม่มีข้อมูลในสัปดาห์ที่เหลือ');
+				}
+			});
+		} else {
+			res.redirect('/semeter');
+		}
 	} else {
 		res.send('Please login to view this page!');
 	}
@@ -15,15 +26,22 @@ router.post('/addnews', (req, res) => {
 	let title = req.body.title;
 	let week = req.body.week;
 	let content = req.body.newscontent;
-	if (content) {
-		connection.query('INSERT INTO news (`news_title`, `week_id`, `news_content`, `created_by`) VALUES (?, (SELECT week_id FROM week WHERE week = ?), ?, (SELECT user_id FROM admin WHERE username = ?))', [title, week, content, req.session.username], function(error, results, fields) {
+	if (title && week && content) {
+		connection.query('INSERT INTO news (`news_title`, `week_id`, `news_content`, `created_by`) VALUES (?, ?, ?, (SELECT user_id FROM admin WHERE username = ?))', [title, week, content, req.session.username], function(error, results, fields) {
 			if (error) throw error;
 		});
 		var msg = "Add news successfully!!!";
 		res.redirect('/home');
 	} else {
 		var msg = "Please select week or add news content to complete!!!";
-		res.render('addnews', {alertMsg: msg});
+		connection.query('SELECT * FROM week WHERE semeter_id = ?', [req.session.semeterId], function(error, results4, fields) {
+			if (error) throw error;
+			if (results4.length > 0) {
+				res.render('addnews', {weekData: results4, alertMsg: msg});
+			} else {
+				res.send('ยังไม่มีข้อมูลในสัปดาห์ที่เหลือ');
+			}
+		});
 	}
 })
 

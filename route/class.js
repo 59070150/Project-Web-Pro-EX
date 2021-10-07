@@ -2,6 +2,7 @@ const express = require("express");
 const connection = require("../config");
 const path = require("path");
 const multer = require("multer");
+const fs = require("fs");
 
 router = express.Router();
 
@@ -58,11 +59,94 @@ router.get('/editClass/:week', (req, res) => {
       connection.query('SELECT * FROM class_material WHERE class_id = ?', [week], function(error, results1, fields) {
         if (error) throw error;
         let description = results1[0].class_description;
-        res.render('editClass', {week: week, desc: description});
+        connection.query('SELECT * FROM class_material_video_link WHERE class_id = ?', [week], function(error, results2, fields) {
+          if (error) throw error;
+          connection.query('SELECT * FROM class_material_file WHERE class_id = ?', [week], function(error, results3, fields) {
+            if (error) throw error;
+            connection.query('SELECT * FROM class_material_project_example WHERE class_id = ?', [week], function(error, results4, fields) {
+              if (error) throw error;
+              res.render('editClass', {week: week, desc: description, vidData: results2, fileData: results3, projData: results4});
+            })
+          })
+        })
       });
     } else {
       res.send('Please login to view this page!');
     }
+})
+
+router.post('/editClass/:week', upload.fields([{ name: 'classDocs', maxCount: 5 }, { name: 'classProj', maxCount: 5 }]), (req, res) => {
+  const { week } = req.params;
+  let classId = parseInt(week);
+  let videoTitle = req.body.videoName;
+  let videoLink = req.body.videoUrl;
+  let classDescription = req.body.classDesc;
+  let video = [];
+  let stack = [];
+  let filesDocs = req.files['classDocs'];
+  let filesProj = req.files['classProj'];
+  if (filesDocs) {
+    connection.query('SELECT * FROM class_material_file WHERE class_id = ?', [classId], function(error, results, fields) {
+      if (error) throw error;
+      for (let i = 0; i < results.length; i++) {
+        if (filesDocs[i].filename == results[i].file_title) {
+          res.send('มีไฟล์นี้ในระบบแล้ว');
+        }
+      }
+    });
+    let fileD = [];
+    let stack2 = [];
+    for (let j = 0; j < filesDocs.length; j++) {
+      fileD.push(filesDocs[j].filename, filesDocs[j].path, classId);
+      stack2.push(fileD);
+      fileD = [];
+    }
+    connection.query('INSERT INTO class_material_file (`file_title`, `file_src`, `class_id`) VALUES ?', [stack2], function(error, results, fields) {
+      if (error) throw error;
+    });
+  } else if (filesProj) {
+    connection.query('SELECT * FROM class_material_project_example WHERE class_id = ?', [classId], function(error, results, fields) {
+      if (error) throw error;
+      for (let i = 0; i < results.length; i++) {
+        if (filesProj[i].filename == results[i].project_title) {
+          res.send('มีไฟล์นี้ในระบบแล้ว');
+        }
+      }
+    });
+    let fileP = [];
+    let stack3 = [];
+    for (let j = 0; j < filesProj.length; j++) {
+      fileP.push(filesProj[j].filename, filesProj[j].path, classId);
+      stack3.push(fileP);
+      fileP = [];
+    }
+    connection.query('INSERT INTO class_material_project_example (`project_title`, `project_src`, `class_id`) VALUES ?', [stack3], function(error, results, fields) {
+      if (error) throw error;
+    });
+  }
+  connection.query('DELETE FROM class_material_video_link WHERE class_id = ?', [classId], function(error, results1, fields) {
+    if (error) throw error;
+  });
+  for (let i = 0; i < videoTitle.length; i++){
+    if (videoTitle[i] != '' && videoLink[i] != ''){
+      video.push(videoTitle[i], videoLink[i], classId);
+      stack.push(video);
+      video = [];
+    } else {
+      stack = [];
+    }
+  }
+  if (stack != []) {
+    connection.query('UPDATE class_material SET class_description = ?, update_date = CURRENT_TIMESTAMP, update_by = (SELECT user_id FROM admin WHERE username = ?) WHERE class_id = ?', [classDescription, req.session.username, classId], function(error, results, fields) {
+      if (error) throw error;
+      connection.query('INSERT INTO class_material_video_link (`video_title`, `video_URL`, `class_id`) VALUES ?', [stack], function(error, results, fields) {
+        if (error) throw error;
+      });
+    });
+  } else {
+    res.send('ใส่วีดีโอด้วยครับ');
+  }
+  res.redirect('/home');
 })
 
 router.get('/addClass', (req, res) => {
@@ -151,6 +235,49 @@ router.get('/download/:path1/:path2/:name', (req, res) => {
       });
     }
   });
+})
+
+router.get('/delFile1/:path1/:path2/:name', (req, res) => {
+  const { path1, path2, name } = req.params;
+  const directoryPath = __dirname + '/' + path2 + '/' + name;
+  connection.query('DELETE FROM class_material_file WHERE file_title = ?', [name], function(error, results, fields) {
+    if (error) throw error;
+    fs.unlink(directoryPath, (err) => {
+      if (err) throw err;
+      //file removed
+    })
+    res.redirect('/home');
+  });
+})
+
+router.get('/delFile2/:path1/:path2/:name', (req, res) => {
+  const { path1, path2, name } = req.params;
+  const directoryPath = __dirname + '/' + path2 + '/' + name;
+  connection.query('DELETE FROM class_material_project_example WHERE project_title = ?', [name], function(error, results, fields) {
+    if (error) throw error;
+    fs.unlink(directoryPath, (err) => {
+      if (err) throw err;
+      //file removed
+    })
+    res.redirect('/home');
+  });
+})
+
+router.get('/delClass/:week', (req, res) => {
+  const { week } = req.params;
+  connection.query('DELETE FROM class_material WHERE class_id = ?', [week], function(error, results, fields) {
+    if (error) throw error;
+    connection.query('DELETE FROM class_material_file WHERE class_id = ?', [week], function(error, results, fields) {
+      if (error) throw error;
+    });
+    connection.query('DELETE FROM class_material_video_link WHERE class_id = ?', [week], function(error, results, fields) {
+      if (error) throw error;
+    });
+    connection.query('DELETE FROM class_material_project_example WHERE class_id = ?', [week], function(error, results, fields) {
+      if (error) throw error;
+    });
+  });
+  res.redirect('/home');
 })
 
 exports.router = router;

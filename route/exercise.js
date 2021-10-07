@@ -45,11 +45,67 @@ router.get('/editEx/:week', (req, res) => {
 			let description = results1[0].exercise_description;
 			let exlink = results1[0].github_solution;
 			let anslink = results1[0].github_answer;
-			res.render('editEx', {week: week, desc: description, exlink: exlink, anslink: anslink});
+			connection.query('SELECT * FROM exercise_question WHERE exercise_id = ?', [week], function(error, results2, fields) {
+				if (error) throw error;
+				res.render('editEx', {week: week, desc: description, exlink: exlink, anslink: anslink, quesData: results2});
+			})
 		  });
 	} else {
 	  res.send('Please login to view this page!');
   }
+})
+
+router.post('/editEx/:week', upload.fields([{ name: 'exImage', maxCount: 5 }]), (req, res) => {
+	const { week } = req.params;
+	let exerciseId = parseInt(week);
+	let exdescription = req.body.excomment;
+	let file = req.files['exImage'];
+	let exGitlink = req.body.exGitlink;
+	let solGitlink = req.body.solGitlink;
+	let gitdate = req.body.gitDate;
+	let exTitle = req.body.extitle;
+	let exDesc = req.body.exdesc;
+	let exScore = req.body.exscore;
+	let question = [];
+	let stack = [];
+	if (file) {
+		connection.query('DELETE FROM exercise_image WHERE exercise_id = ?', [exerciseId], function(error, results, fields) {
+			if (error) throw error;
+		});
+		let img = [];
+		let stack2 = [];
+		for (let j = 0; j < file.length; j++){
+			img.push(file[j].filename, file[j].path, exerciseId);
+			stack2.push(img);
+			img = [];
+		}
+		connection.query('INSERT INTO exercise_image (`image_title`, `image_src`, `exercise_id`) VALUES ?', [stack2], function(error, results, fields) {
+			if (error) throw error;
+		});
+	}
+	for (let i = 0; i < exScore.length; i++){
+		if (exTitle[i] != '' && exDesc[i] != '' && exScore[i] != ''){
+		  question.push(exTitle[i], exDesc[i], exScore[i], exerciseId);
+		  stack.push(question);
+		  question = [];
+		} else {
+		  stack = [];
+		}
+	}
+	if (stack != []) {
+		connection.query('DELETE FROM exercise_question WHERE exercise_id = ?', [exerciseId], function(error, results, fields) {
+			if (error) throw error;
+		});
+		connection.query('UPDATE exercise SET exercise_description = ?, github_solution = ?, github_answer = ?, github_date = ?, update_date = CURRENT_TIMESTAMP,  update_by = (SELECT user_id FROM admin WHERE username = ?) WHERE exercise_id = ?', [exdescription, exGitlink, solGitlink, gitdate, req.session.username, exerciseId], function(error, results, fields) {
+			if (error) throw error;
+			connection.query('INSERT INTO exercise_question (`question_title`, `question_description`, `question_score`, `exercise_id`) VALUES ?', [stack], function(error, results, fields) {
+				if (error) throw error;
+			});
+		});
+	} else {
+		res.send("Please insert question data before submit!!!");
+	}
+	res.redirect('/home');
 })
 
 router.get('/addExercise', (req, res) => {
@@ -80,7 +136,7 @@ router.post('/addExercise', upload.array('exImage'), (req, res) => {
 		let question = [];
 		let stack = [];
 		for (let i = 0; i < exScore.length; i++){
-			if (exTitle[i] != '' && exDesc[i] != '' && exScore != ''){
+			if (exTitle[i] != '' && exDesc[i] != '' && exScore[i] != ''){
 			  question.push(exTitle[i], exDesc[i], exScore[i], exerciseId);
 			  stack.push(question);
 			  question = [];
@@ -116,6 +172,20 @@ router.post('/addExercise', upload.array('exImage'), (req, res) => {
 		}
 		res.redirect('/home');
 	}
+})
+
+router.get('/delEx/:week', (req, res) => {
+	const { week } = req.params;
+	connection.query('DELETE FROM exercise WHERE exercise_id = ?', [week], function(error, results, fields) {
+	  if (error) throw error;
+	  connection.query('DELETE FROM exercise_image WHERE exercise_id = ?', [week], function(error, results, fields) {
+		if (error) throw error;
+	  });
+	  connection.query('DELETE FROM exercise_question WHERE exercise_id = ?', [week], function(error, results, fields) {
+		if (error) throw error;
+	  });
+	});
+	res.redirect('/home');
 })
 
 exports.router = router;
