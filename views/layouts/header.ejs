@@ -9,7 +9,7 @@
 </head>
 <body>
     <% if (!isAdmin) { %>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
+        <nav class="navbar is-info" role="navigation" aria-label="main navigation">
           <div class="navbar-brand">
             <a class="navbar-item">
               <img src="/itkmitl.png" width="112" height="28">
@@ -22,17 +22,25 @@
             </a>
           </div>
         
-          <div id="navbarBasic" class="navbar-menu">
+          <div id="navbarBasic" class="navbar-menu is-active">
             <div class="navbar-start">
               <a href="/home" class="navbar-item">
                 หน้าหลัก
+              </a>
+
+              <a href="/semeter" class="navbar-item">
+                เลือกปีการศึกษาและเทอม
               </a>
         
               <a href="/progress" class="navbar-item">
                 ดูคะแนน
               </a>
+
+              <a href="/givescore" class="navbar-item">
+                ให้คะแนน
+              </a>
     
-              <div class="navbar-item has-dropdown is-hoverable">
+              <!-- <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
                   More
                 </a>
@@ -42,7 +50,7 @@
                     Report an issue
                   </a>
                 </div>
-              </div>
+              </div> -->
             </div>
     
             <div class="navbar-end">
@@ -56,7 +64,7 @@
           </div>
         </nav>
         <%} else {%>
-            <nav class="navbar" role="navigation" aria-label="main navigation">
+            <nav class="navbar is-info" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
                   <a class="navbar-item">
                     <img src="/itkmitl.png" width="112" height="28">
@@ -69,7 +77,7 @@
                   </a>
                 </div>
               
-                <div id="navbarBasic" class="navbar-menu">
+                <div id="navbarBasic" class="navbar-menu is-active">
                   <div class="navbar-start">
                     <a href="/home" class="navbar-item">
                       หน้าหลัก
@@ -92,7 +100,7 @@
                     </a>
           
                     <a href="/register" class="navbar-item">
-                      จัดการผู้ใช้งาน
+                      สมัครผู้ใช้งาน
                     </a>
           
                     <div class="navbar-item has-dropdown is-hoverable">
@@ -101,8 +109,8 @@
                       </a>
               
                       <div class="navbar-dropdown">
-                        <a class="navbar-item">
-                          Report an issue
+                        <a href="/admin" class="navbar-item">
+                          จัดการผู้ใช้งาน
                         </a>
                       </div>
                     </div>
