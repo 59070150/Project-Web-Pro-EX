@@ -30,11 +30,11 @@
                             %>
                                 <tr>
                                   <td><%= data.question_title %></td>
-                                  <td><input id="score<%= i; %>" name="score[]" type="text"> / <%= data.question_score %></td>
+                                  <td><input id="score" name="score[]" type="text"> / <%= data.question_score %></td>
                                   <% if (isAdmin) { %>
-                                    <td><textarea name="insComment[]" id="" cols="30" rows="3"></textarea></td>
+                                    <td><textarea name="insComment[]" id="insComment" cols="30" rows="3"></textarea></td>
                                   <% } else { %>
-                                    <td><textarea name="taComment[]" id="" cols="30" rows="3"></textarea></td>
+                                    <td><textarea name="taComment[]" id="taComment" cols="30" rows="3"></textarea></td>
                                   <% } %>
                                 </tr>
                             <% i++; }) %>

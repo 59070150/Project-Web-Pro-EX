@@ -1,73 +1,22 @@
 <%- include('layouts/header'); %>
-  <% if (!isAdmin) { %>
+  <% if (isAdmin || !isAdmin) { %>
     <section class="hero is-warning">
       <div class="hero-body">
         <div class="container">
           <div class="columns">
             <div class="title is-1">ดูคะแนน</div>
           </div>
-          <div class="columns">
-            <div class="title is-2">รหัสนักศึกษา : 59070150</div>
-          </div>
-          <form action="" method="post">
+          <form action="/progress" method="post">
             <div class="select">
-              <select name="" id="">
+              <select name="week">
                 <option value="">สัปดาห์</option>
-                <% for (let i = 1; i <= 15; i++) { %>
-                  <option value="<% i; %>">สัปดาห์ <%= i; %></option>
-                <% } %>
-              </select>
-            </div>
-            <input type="submit" value="ดูคะแนน">
-          </form>
-          <div class="columns">
-            <div class="table-container column mt-5">
-              <table class="table is-bordered">
-                  <thead>
-                      <tr>
-                          <th>แบบฝึกหัด</th>
-                          <th>คะแนน</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>แบบฝึกหัด 1</td>
-                      <td>100</td>
-                    </tr>
-                    <tr>
-                      <td>แบบฝึกหัด 2</td>
-                      <td>100</td>
-                    </tr>
-                    <tr>
-                      <td>แบบฝึกหัด 3</td>
-                      <td>100</td>
-                    </tr>
-                  </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="columns">
-            <div class="title is-3">ความคิดเห็นของอาจารย์ผู้สอน</div>
-          </div>
-          <div class="columns">
-            <div class="message column">ทำได้ดีแล้ว ขอให้พยายามพัฒนาตนเองต่อไปให้มากขึ้นกว่านี้</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  <% } else { %>
-    <section class="hero is-warning">
-      <div class="hero-body">
-        <div class="container">
-          <div class="columns">
-            <div class="title is-1">ดูคะแนนสำหรับเจ้าหน้าที่</div>
-          </div>
-          <form action="" method="post">
-            <div class="select">
-              <select name="" id="">
-                <option value="">สัปดาห์</option>
-                <% for (let i = 1; i <= 15; i++) { %>
-                  <option value="<%= i; %>">สัปดาห์ <%= i; %></option>
+                <% if (weekData.length != 0) {
+                  weekData.forEach(function(data) {
+                %>
+                  <option value="<%= data.week_id %>">สัปดาห์ที่ <%= data.week %></option>
+                <% }) %>
+                <% } else { %>
+                  <option value="">Not found</option>
                 <% } %>
               </select>
             </div>
@@ -79,42 +28,59 @@
                   <thead>
                       <tr>
                           <th>รหัสนักศึกษา</th>
-                          <th>แบบฝึกหัด 1</th>
-                          <th>แบบฝึกหัด 2</th>
-                          <th>แบบฝึกหัด 3</th>
-                          <th>ความคิดเห็น</th>
+                          <th>แบบฝึกหัด</th>
+                          <th>คะแนน</th>
+                          <th>ความคิดเห็นของอาจารย์ผู้สอน</th>
+                          <th>ความคิดเห็นของ TA</th>
                       </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>59070150</td>
-                      <td>100</td>
-                      <td>100</td>
-                      <td>100</td>
-                      <td>พยายามทำความเข้าใจให้มากกว่านี้</td>
-                    </tr>
-                    <tr>
-                      <td>59070151</td>
-                      <td>100</td>
-                      <td>100</td>
-                      <td>100</td>
-                      <td>พยายามทำความเข้าใจให้มากกว่านี้ และลองทำในสิ่งที่ไม่เคยทำบ้างในบางครั้ง</td>
-                    </tr>
-                    <tr>
-                      <td>59070152</td>
-                      <td>100</td>
-                      <td>100</td>
-                      <td>100</td>
-                      <td>ทำได้ดีแล้ว แต่ต้องมีปฏิสัมพันธ์กับเพื่อนๆบ้าง</td>
-                    </tr>
+                    <% if (scoreData.length != 0) {
+                            var title = '';
+                            var score = 0;
+                            var comment = '';
+                            if (quesData.length != 0) {
+                              scoreData.forEach(function(data) {
+                                quesData.forEach(data2 => {
+                                  if (data.question_id == data2.question_id) {
+                                    title = data2.question_title;
+                                    score = data.score;
+                                    comment = data.instructor_comment;
+                                  } else {
+                                    // title = 'No Data';
+                                    // score = 0;
+                                    // comment = 'No Data';
+                                  }
+                                })
+                        %>
+                            <tr>
+                              <td><%= data.student_id %></td>
+                              <td><%= title %></td>
+                              <td><%= data.score %></td>
+                              <td><%= data.instructor_comment %></td>
+                              <td><%= data.TA_comment %></td>
+                            </tr>
+                        <% i = ''; score = 0; comment = ''; }) } else { %>
+                            <tr>
+                              <td colspan="7">No Data Found</td>
+                            </tr>
+                        <% } %>
+                        <% } else { %>
+                            <tr>
+                              <td colspan="7">No Data Found</td>
+                            </tr>
+                        <% } %>
                   </tbody>
               </table>
             </div>
           </div>
-          <div align="center"><button class="button is-primary mt-5">Export to excel</button> <button class="button is-danger mt-5">Export all to excel</button></div>
+          <% if (isAdmin) { %>
+            <div align="center"><a href="/export/<%= week %>" class="button is-primary mt-5">Export to CSV</a> <a href="/exportall" class="button is-danger mt-5">Export all to CSV</a></div>
+          <% } %>
         </div>
       </div>
     </section>
+  <% } else { %>
   <% } %>
     
 <%- include('layouts/footer'); %>
