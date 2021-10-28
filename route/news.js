@@ -27,7 +27,7 @@ router.post('/addnews', (req, res) => {
 	let week = req.body.week;
 	let content = req.body.newscontent;
 	if (title && week && content) {
-		connection.query('INSERT INTO news (`news_title`, `week_id`, `news_content`, `created_by`) VALUES (?, ?, ?, (SELECT user_id FROM admin WHERE username = ?))', [title, week, content, req.session.username], function(error, results, fields) {
+		connection.query('INSERT INTO news (`news_title`, `week_id`, `news_content`, `created_by`, `update_by`) VALUES (?, ?, ?, (SELECT user_id FROM admin WHERE username = ?), (SELECT user_id FROM admin WHERE username = ?))', [title, week, content, req.session.username, req.session.username], function(error, results, fields) {
 			if (error) throw error;
 		});
 		var msg = "Add news successfully!!!";

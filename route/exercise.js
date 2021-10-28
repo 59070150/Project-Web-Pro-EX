@@ -156,7 +156,7 @@ router.post('/addExercise', upload.array('exImage'), (req, res) => {
 				if (resultsC.length > 0) {
 				  res.send('This week has data already');
 				} else {
-				  connection.query('INSERT INTO exercise (`exercise_id`, `exercise_title`, `exercise_description`, `github_solution`, `github_answer`, `github_date`, `week_id`, `created_by`, `update_by`) VALUES (?, ?, ?, ?, ?, ?, (SELECT week_id FROM week WHERE week = ?), (SELECT user_id FROM admin WHERE username = ?), (SELECT user_id FROM admin WHERE username = ?))', [exerciseId, exerciseTitle, exdescription, exGitlink, solGitlink, gitdate, exerciseId, req.session.username, req.session.username], function(error, results, fields) {
+				  connection.query('INSERT INTO exercise (`exercise_id`, `exercise_title`, `exercise_description`, `github_exercise`, `github_solution`, `github_date`, `week_id`, `created_by`, `update_by`) VALUES (?, ?, ?, ?, ?, ?, (SELECT week_id FROM week WHERE week = ?), (SELECT user_id FROM admin WHERE username = ?), (SELECT user_id FROM admin WHERE username = ?))', [exerciseId, exerciseTitle, exdescription, exGitlink, solGitlink, gitdate, exerciseId, req.session.username, req.session.username], function(error, results, fields) {
 					if (error) throw error;
 					connection.query('INSERT INTO exercise_question (`question_title`, `question_description`, `question_score`, `exercise_id`) VALUES ?', [stack], function(error, results, fields) {
 						if (error) throw error;
